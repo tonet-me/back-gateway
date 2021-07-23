@@ -26,6 +26,8 @@ message RegisterResponse {
   User data = 2;
 }
 
+
 service UserService {
   rpc Register (RegisterRequest) returns (RegisterResponse);
+
 }

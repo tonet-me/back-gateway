@@ -15,7 +15,7 @@ export class AuthController {
   }
 
   @Get('/register')
-  add(@Body() registerBody: RegisterDTO): Observable<any> {
+  register(@Body() registerBody: RegisterDTO): Observable<any> {
     return this.userService.register(registerBody);
   }
 }
