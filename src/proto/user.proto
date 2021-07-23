@@ -1,16 +1,31 @@
 syntax = "proto3";
 
-package gateway;
+package user;
 
-message AddRequest {
-  int32 a = 1;
-  int32 b = 2;
+message RegisterRequest {
+  string firstName = 1;
+  string lastName = 2;
+  string password = 3;
+  string rePassword = 4;
+  string email = 5;
+  string mobile = 6;
+  string profilePhoto = 7;
+
 }
 
-message AddResponse {
-  int32 result = 1;
+message User {
+  string firstName = 1;
+  string lastName = 2;
+  string email = 5;
+  string mobile = 6;
+  string profilePhoto = 7;
 }
 
-service GatewayService {
-  rpc Add (AddRequest) returns (AddResponse);
+message RegisterResponse {
+  string message = 1;
+  User data = 2;
+}
+
+service UserService {
+  rpc Register (RegisterRequest) returns (RegisterResponse);
 }
