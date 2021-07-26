@@ -11,7 +11,7 @@ import { AuthController } from './auth.controller';
         transport: Transport.GRPC,
         options: {
           package: 'user',
-          protoPath: path.join(__dirname, '../proto/user.proto'),
+          protoPath: path.join(__dirname, '../../proto/user.proto'),
           url: 'localhost:50051',
         },
       },
