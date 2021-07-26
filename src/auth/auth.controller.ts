@@ -1,21 +1,21 @@
-import { Body, Controller, Get, Inject } from '@nestjs/common';
-import { ClientGrpc, GrpcMethod } from '@nestjs/microservices';
+import { Body, Controller, Get, Inject, Post } from '@nestjs/common';
+import { ClientGrpc } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
-import { RegisterDTO } from './dto/register.dto';
-import { UserService } from './interface/auth.grpc.interface';
+import { AuthOtpDTO } from './dto/auth.otp.dto';
+import { IAuthService, IMakeOtpResponse } from './interface/auth.interface';
 
 @Controller('auth')
 export class AuthController {
-  private userService: UserService;
+  private authService: IAuthService;
 
-  constructor(@Inject('USER_PACKAGE') private client: ClientGrpc) {}
+  constructor(@Inject('AUTH_OTP_PACKAGE') private client: ClientGrpc) {}
 
   onModuleInit() {
-    this.userService = this.client.getService<UserService>('UserService');
+    this.authService = this.client.getService<IAuthService>('AuthService');
   }
 
-  @Get('/register')
-  register(@Body() registerBody: RegisterDTO): Observable<any> {
-    return this.userService.register(registerBody);
+  @Post('/otp')
+  makeOtp(@Body() makeOtpBody: AuthOtpDTO): Observable<any> {
+    return this.authService.makeOtp(makeOtpBody);
   }
 }

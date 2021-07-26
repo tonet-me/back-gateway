@@ -21,8 +21,16 @@ async function bootstrap() {
 
   const PORT: number = configService.get('port');
   const HOST: string = configService.get('host');
-  await app.listen(PORT, () => {
-    Logger.log(`API-GATEWAY RUN IN 🚀 ${HOST}:${PORT} 🚀`);
-  });
+  await app
+    .listen(PORT)
+    .then(() => {
+      Logger.log(
+        `in 🚀 ${HOST}:${PORT} 🚀`,
+        'RUN API-GATEWAY SERVER SUCCESSFUL',
+      );
+    })
+    .catch((err) => {
+      Logger.error(err, 'RUN API-GATEWAY SERVER FAILD');
+    });
 }
 bootstrap();

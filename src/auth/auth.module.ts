@@ -1,17 +1,18 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { ClientsModule, Transport } from '@nestjs/microservices';
-import * as path from 'path';
+import { join } from 'path';
 import { AuthController } from './auth.controller';
 
 @Module({
   imports: [
     ClientsModule.register([
       {
-        name: 'USER_PACKAGE',
+        name: 'AUTH_OTP_PACKAGE',
         transport: Transport.GRPC,
         options: {
-          package: 'user',
-          protoPath: path.join(__dirname, '../../proto/user.proto'),
+          package: ['otp'],
+          protoPath: join(__dirname, '../../proto/auth.proto'),
           url: 'localhost:50051',
         },
       },

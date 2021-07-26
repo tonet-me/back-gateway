@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package otp;
+
+message MakeOtpRequest {
+  string phoneNumber = 1;
+}
+
+message MakeOtpResponse {
+  string code = 1;
+  string jwt = 2;
+  string status = 3;
+}
+
+service AuthService {
+  rpc MakeOtp (MakeOtpRequest) returns (MakeOtpResponse);
+}
