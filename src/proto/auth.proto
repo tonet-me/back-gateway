@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package otp;
+package user.auth.otp;
 
 message MakeOtpRequest {
   string phoneNumber = 1;

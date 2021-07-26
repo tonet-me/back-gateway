@@ -15,7 +15,7 @@ export class AuthController {
   }
 
   @Post('/otp')
-  makeOtp(@Body() makeOtpBody: AuthOtpDTO): Observable<any> {
+  makeOtp(@Body() makeOtpBody: AuthOtpDTO): Observable<IMakeOtpResponse> {
     return this.authService.makeOtp(makeOtpBody);
   }
 }

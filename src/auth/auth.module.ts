@@ -11,7 +11,7 @@ import { AuthController } from './auth.controller';
         name: 'AUTH_OTP_PACKAGE',
         transport: Transport.GRPC,
         options: {
-          package: ['otp'],
+          package: ['user.auth.otp'],
           protoPath: join(__dirname, '../../proto/auth.proto'),
           url: 'localhost:50051',
         },
