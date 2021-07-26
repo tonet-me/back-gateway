@@ -2,9 +2,14 @@ import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { Logger } from '@nestjs/common';
+import { NotFoundExceptionFilter } from './common/filter/notfound.filter';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
   const configService = app.get<ConfigService>(ConfigService);
+
+  app.useGlobalFilters(new NotFoundExceptionFilter());
 
   app.useGlobalPipes(
     new ValidationPipe({
@@ -13,10 +18,11 @@ async function bootstrap() {
       forbidUnknownValues: false,
     }),
   );
-  const PORT = configService.get('port');
-  const HOST = configService.get('host');
+
+  const PORT: number = configService.get('port');
+  const HOST: string = configService.get('host');
   await app.listen(PORT, () => {
-    console.log(`API-GATEWAY run in ${HOST}:${PORT}`);
+    Logger.log(`API-GATEWAY RUN IN 🚀 ${HOST}:${PORT} 🚀`);
   });
 }
 bootstrap();
