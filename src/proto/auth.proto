@@ -1,15 +1,19 @@
 syntax = "proto3";
 
-package user.auth.otp;
+package  user.auth.otp;
 
 message MakeOtpRequest {
   string phoneNumber = 1;
 }
 
 message MakeOtpResponse {
-  string code = 1;
-  string jwt = 2;
-  string status = 3;
+  bool success = 1;
+  string message = 2;
+  MakeOtpResult data = 3;
+}
+
+message MakeOtpResult {
+ int32 code = 1;
 }
 
 service AuthService {
