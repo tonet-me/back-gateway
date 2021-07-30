@@ -1,14 +1,15 @@
-export class Responser {
-  public readonly success;
-  public readonly message;
-  public readonly result;
-  public readonly status;
-  constructor(success, message, result, status = null) {
+export class Responser<T> {
+  public readonly success: boolean;
+  public readonly message: string;
+  public readonly data: T;
+  public readonly status: number;
+  constructor(success, message, result: T, status = null) {
     this.success = success;
     this.message = message;
-    this.result = result;
+    this.data = result;
     this.status = status;
   }
+  t;
 }
 
 export interface ServiceResponse<T> {

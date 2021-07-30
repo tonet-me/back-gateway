@@ -2,6 +2,7 @@ import { Body, Controller, Inject, Post } from '@nestjs/common';
 import { ClientGrpc } from '@nestjs/microservices';
 import { map, Observable } from 'rxjs';
 import { IResponse } from 'src/common/interface/responser.interface';
+import { Responser } from 'src/common/utils/responser';
 // import { Responser } from 'src/common/utils/responser';
 import { AuthOtpDTO } from './dto/auth.otp.dto';
 import { IAuthService, MakeOtpResult } from './interface/auth.interface';
@@ -20,14 +21,18 @@ export class AuthController {
   makeOtp(
     @Body() makeOtpBody: AuthOtpDTO,
   ): Observable<IResponse<MakeOtpResult>> {
+    console.log('body', makeOtpBody);
+
     return this.authService.makeOtp(makeOtpBody).pipe(
       map((data) => {
         console.log(data);
-        return {
-          success: data.success,
-          message: data.message,
-          data: data.data,
-        };
+        return data;
+
+        // {
+        //   success: data.success,
+        //   message: data.message,
+        //   data: data.data,
+        // };
       }),
     );
   }
