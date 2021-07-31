@@ -16,6 +16,24 @@ message MakeOtpResult {
  int32 code = 1;
 }
 
+message LoginOtpRequest {
+  string phoneNumber = 1;
+  int32 code = 2;
+}
+
+message LoginOtpResult {
+  string status =1;
+  string jwt = 2 ;
+}
+
+message LoginOtpResponse{
+  bool success = 1;
+  string message = 2;
+  LoginOtpResult data = 3;
+}
+
 service AuthService {
   rpc MakeOtp (MakeOtpRequest) returns (MakeOtpResponse);
+  rpc LoginOtp (LoginOtpRequest) returns (LoginOtpResponse);
+
 }

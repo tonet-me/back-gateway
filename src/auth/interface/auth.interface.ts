@@ -3,13 +3,31 @@ import { IResponse } from 'src/common/interface/responser.interface';
 import { AuthOtpDTO } from '../dto/auth.otp.dto';
 
 export interface IAuthService {
-  makeOtp(data: IMakeOtpRequest): Observable<IResponse<MakeOtpResult>>;
+  makeOtp(data: IMakeOtpRequest): Observable<IResponse<IMakeOtpResult>>;
+  loginOtp(data: ILoginOtp): Observable<IResponse<ILoginOtpResult>>;
 }
 
+/**
+ * make otp interface
+ */
 export interface IMakeOtpRequest {
   phoneNumber: string;
 }
 
-export interface MakeOtpResult {
+export interface IMakeOtpResult {
   code: number;
+}
+
+/**
+ * check verification code
+ */
+
+export interface ILoginOtp {
+  phoneNumber: string;
+  code: number;
+}
+
+export interface ILoginOtpResult {
+  status: string;
+  jwt: number;
 }

@@ -5,7 +5,7 @@ import { IResponse } from 'src/common/interface/responser.interface';
 import { Responser } from 'src/common/utils/responser';
 // import { Responser } from 'src/common/utils/responser';
 import { AuthOtpDTO } from './dto/auth.otp.dto';
-import { IAuthService, MakeOtpResult } from './interface/auth.interface';
+import { IAuthService, IMakeOtpResult } from './interface/auth.interface';
 
 @Controller('auth')
 export class AuthController {
@@ -20,19 +20,12 @@ export class AuthController {
   @Post('/otp')
   makeOtp(
     @Body() makeOtpBody: AuthOtpDTO,
-  ): Observable<IResponse<MakeOtpResult>> {
+  ): Observable<IResponse<IMakeOtpResult>> {
     console.log('body', makeOtpBody);
 
     return this.authService.makeOtp(makeOtpBody).pipe(
       map((data) => {
-        console.log(data);
         return data;
-
-        // {
-        //   success: data.success,
-        //   message: data.message,
-        //   data: data.data,
-        // };
       }),
     );
   }
