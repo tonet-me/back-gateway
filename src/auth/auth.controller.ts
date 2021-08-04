@@ -2,10 +2,13 @@ import { Body, Controller, Inject, Post } from '@nestjs/common';
 import { ClientGrpc } from '@nestjs/microservices';
 import { map, Observable } from 'rxjs';
 import { IResponse } from 'src/common/interface/responser.interface';
-import { Responser } from 'src/common/utils/responser';
 // import { Responser } from 'src/common/utils/responser';
-import { AuthOtpDTO } from './dto/auth.otp.dto';
-import { IAuthService, IMakeOtpResult } from './interface/auth.interface';
+import { LoginOtpDTO, MakeOtpDTO } from './dto/auth.otp.dto';
+import {
+  IAuthService,
+  ILoginOtpResult,
+  IMakeOtpResult,
+} from './interface/auth.interface';
 
 @Controller('auth')
 export class AuthController {
@@ -17,13 +20,21 @@ export class AuthController {
     this.authService = this.client.getService<IAuthService>('AuthService');
   }
 
-  @Post('/otp')
+  @Post('/otp-make')
   makeOtp(
-    @Body() makeOtpBody: AuthOtpDTO,
+    @Body() makeOtpBody: MakeOtpDTO,
   ): Observable<IResponse<IMakeOtpResult>> {
-    console.log('body', makeOtpBody);
-
     return this.authService.makeOtp(makeOtpBody).pipe(
+      map((data) => {
+        return data;
+      }),
+    );
+  }
+  @Post('/otp-login')
+  loginOtp(
+    @Body() loginOtpBody: LoginOtpDTO,
+  ): Observable<IResponse<ILoginOtpResult>> {
+    return this.authService.loginOtp(loginOtpBody).pipe(
       map((data) => {
         return data;
       }),
