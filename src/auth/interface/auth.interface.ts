@@ -27,6 +27,5 @@ export interface ILoginOtp {
 }
 
 export interface ILoginOtpResult {
-  status: string;
-  jwt: string;
+  accessToken: string;
 }

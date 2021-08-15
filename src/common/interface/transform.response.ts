@@ -25,9 +25,18 @@ export class TransformInterceptor<T>
       map((data) => {
         console.log('data', data);
 
-        if (data.status) {
+        // if (!data.success && data.data.statusCode) throw data;
+        //   return {
+        //     statusCode: data.status,
+        //     timestamp: data.timestamp,
+        //     path: data.path,
+        //     message: data.message,
+        //   };
+        if (data.status)
           context.switchToHttp().getResponse().status(data.status);
-        }
+        if (!data.success && data.data.statusCode)
+          context.switchToHttp().getResponse().status(data.data.statusCode);
+
         return {
           success: data.success,
           message: data.message || '',

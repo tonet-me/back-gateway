@@ -10,10 +10,16 @@ message MakeOtpResponse {
   bool success = 1;
   string message = 2;
   MakeOtpResult data = 3;
+  
 }
 
 message MakeOtpResult {
  int32 code = 1;
+   //ERROR
+   int32 statusCode = 2 ;
+   string timestamp = 3 ;
+   string path = 4 ;
+   string message = 5 ;
 }
 
 message LoginOtpRequest {
@@ -22,8 +28,12 @@ message LoginOtpRequest {
 }
 
 message LoginOtpResult {
-  string status =1;
-  string jwt = 2 ;
+  string accessToken = 1 ;
+  //ERROR
+  int32 statusCode = 2 ;
+  string timestamp = 3 ;
+  string path = 4 ;
+  string message = 5 ;
 }
 
 message LoginOtpResponse{
