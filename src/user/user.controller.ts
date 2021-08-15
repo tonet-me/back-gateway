@@ -1,8 +1,9 @@
-import { Body, Controller, Inject, Put, Req } from '@nestjs/common';
+import { Body, Controller, Inject, Put, Req, UseGuards } from '@nestjs/common';
 import { ClientGrpc } from '@nestjs/microservices';
 import { from, Observable } from 'rxjs';
 import { IReq } from 'src/common/interface/req.interface';
 import { IResponse } from 'src/common/interface/responser.interface';
+import { AuthGuard } from 'src/auth/guard/auth.guard';
 import { UserProfileUpdateDTO } from './dto/update.profile.dto';
 import { IProfileUpdateResult, IUserService } from './interface/user.interface';
 
@@ -16,16 +17,17 @@ export class UserController {
     this.userService = this.client.getService<IUserService>('UserService');
   }
   @Put('/profile')
-  makeOtp(
+  @UseGuards(AuthGuard)
+  updateProfile(
     @Req() req: IReq,
     @Body() updateProfileBody: UserProfileUpdateDTO,
   ): Observable<IResponse<IProfileUpdateResult>> {
-    console.log('ppp');
+    console.log('user', req.user);
 
     return from(
       this.userService.updateProfile({
         ...updateProfileBody,
-        userId: '610e5916f9300756feab1e99',
+        userId: req.user._id,
       }),
     );
   }

@@ -2,6 +2,25 @@ syntax = "proto3";
 
 package  user.profile;
 
+
+message UserResult {
+  string _id = 1;
+  string firstName = 2;
+  string lastName = 3;
+  string email = 4;
+  string mobile = 5;
+  string userName = 6;
+  bool isActive = 7;
+  string status = 8;
+  bool emailVerify = 9;
+  string profilePicture = 10;
+    //ERROR
+    int32 statusCode = 11 ;
+    string timestamp = 12 ;
+    string path = 13 ;
+    string message = 14 ;
+
+}
 message ProfileUpdateRequest {
 
 

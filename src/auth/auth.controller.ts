@@ -1,6 +1,6 @@
 import { Body, Controller, Inject, Post } from '@nestjs/common';
 import { ClientGrpc } from '@nestjs/microservices';
-import { from, map, Observable } from 'rxjs';
+import { from, Observable } from 'rxjs';
 import { IResponse } from 'src/common/interface/responser.interface';
 // import { Responser } from 'src/common/utils/responser';
 import { LoginOtpDTO, MakeOtpDTO } from './dto/auth.otp.dto';

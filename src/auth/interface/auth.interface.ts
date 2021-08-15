@@ -4,6 +4,7 @@ import { IResponse } from 'src/common/interface/responser.interface';
 export interface IAuthService {
   makeOtp(data: IMakeOtpRequest): Observable<IResponse<IMakeOtpResult>>;
   loginOtp(data: ILoginOtp): Observable<IResponse<ILoginOtpResult>>;
+  validateAccessToken(data: ILoginOtpResult): Observable<IResponse<any>>;
 }
 
 /**

@@ -2,6 +2,24 @@ syntax = "proto3";
 
 package  user.auth.otp;
 
+message UserResult {
+  string _id = 1;
+  string firstName = 2;
+  string lastName = 3;
+  string email = 4;
+  string mobile = 5;
+  string userName = 6;
+  bool isActive = 7;
+  string status = 8;
+  bool emailVerify = 9;
+  string profilePicture = 10;
+    //ERROR
+    int32 statusCode = 11 ;
+    string timestamp = 12 ;
+    string path = 13 ;
+    string message = 14 ;
+
+}
 message MakeOtpRequest {
   string phoneNumber = 1;
 }
@@ -41,9 +59,14 @@ message LoginOtpResponse{
   string message = 2;
   LoginOtpResult data = 3;
 }
+message ValidateAccessTokenResponse{
+  bool success = 1;
+  string message = 2;
+  UserResult data = 3;
+}
 
 service AuthService {
   rpc MakeOtp (MakeOtpRequest) returns (MakeOtpResponse);
   rpc LoginOtp (LoginOtpRequest) returns (LoginOtpResponse);
-
+  rpc ValidateAccessToken (LoginOtpResult) returns (ValidateAccessTokenResponse);
 }

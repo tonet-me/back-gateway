@@ -24,3 +24,7 @@ export interface IProfileUpdateResult {
   readonly email: string;
   readonly profilePicture: string;
 }
+
+export interface IUser {
+  _id: string;
+}
