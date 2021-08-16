@@ -4,7 +4,6 @@ import {
   ArgumentsHost,
   HttpException,
   HttpStatus,
-  InternalServerErrorException,
 } from '@nestjs/common';
 
 @Catch()
@@ -17,8 +16,6 @@ export class AllExceptionsFilter implements ExceptionFilter {
     let errorName: string = '';
     let message: string = '';
 
-    console.log('exception is: ', exception);
-    // if (exception.data.statusCode) status = exception.data.statusCode;
     if (exception instanceof HttpException) {
       const error: any = exception.getResponse().valueOf();
       message = error?.message;

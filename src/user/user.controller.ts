@@ -22,8 +22,6 @@ export class UserController {
     @Req() req: IReq,
     @Body() updateProfileBody: UserUpdateLimitDTO,
   ): Observable<IResponse<IUser>> {
-    console.log('body', updateProfileBody);
-
     return from(
       this.userService.updateProfile({
         ...updateProfileBody,

@@ -23,15 +23,6 @@ export class TransformInterceptor<T>
   ): Observable<IResponse<T>> {
     return next.handle().pipe(
       map((data) => {
-        console.log('data', data);
-
-        // if (!data.success && data.data.statusCode) throw data;
-        //   return {
-        //     statusCode: data.status,
-        //     timestamp: data.timestamp,
-        //     path: data.path,
-        //     message: data.message,
-        //   };
         if (data.status)
           context.switchToHttp().getResponse().status(data.status);
         if (!data.success && data.data.statusCode)

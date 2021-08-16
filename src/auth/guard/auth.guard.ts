@@ -4,7 +4,6 @@ import {
   ExecutionContext,
   Inject,
   Injectable,
-  UnauthorizedException,
 } from '@nestjs/common';
 import { ClientGrpc } from '@nestjs/microservices';
 import { from, map, mapTo, Observable, of } from 'rxjs';
@@ -23,7 +22,6 @@ export class AuthGuard implements CanActivate {
     const request = context.switchToHttp().getRequest();
     let authHeader = request.headers.authorization as string;
     authHeader = authHeader.replace('Bearer ', '');
-    console.log('token', authHeader);
 
     if (!authHeader) {
       throw new BadRequestException('Authorization header not found.');
@@ -32,7 +30,6 @@ export class AuthGuard implements CanActivate {
       this.authService.validateAccessToken({ accessToken: authHeader }),
     ).pipe(
       map((data) => {
-        console.log('map', data);
         if (data && data.success && data.data._id) {
           request.user = data.data;
           return true;
@@ -41,33 +38,3 @@ export class AuthGuard implements CanActivate {
     );
   }
 }
-// constructor(private readonly authService: AuthService) {}
-
-// getRequest(context: ExecutionContext) {
-//   const ctx = GqlExecutionContext.create(context);
-//   return ctx.getContext().req;
-// }
-
-// async canActivate(context: ExecutionContext): Promise<boolean> {
-//   const req = this.getRequest(context);
-//   const authHeader = req.headers.authorization as string;
-
-//   if (!authHeader) {
-//     throw new BadRequestException('Authorization header not found.');
-//   }
-
-//   const {
-//     isValid,
-//     user,
-//     isAdmin = false,
-//   } = await this.authService.validateToken(authHeader);
-//   console.log(isValid);
-
-//   if (isValid) {
-//     req.user = user;
-//     req.user.isAdmin = isAdmin;
-//     return true;
-//   }
-//   throw new UnauthorizedException('Token not valid');
-// }
-// }

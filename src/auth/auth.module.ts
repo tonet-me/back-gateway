@@ -1,7 +1,6 @@
 import { Global, Module } from '@nestjs/common';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { join } from 'path';
-import { UserModule } from 'src/user/user.module';
 import { AuthController } from './auth.controller';
 @Global()
 @Module({

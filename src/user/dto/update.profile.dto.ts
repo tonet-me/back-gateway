@@ -7,7 +7,6 @@ import {
   IsString,
   IsUrl,
 } from 'class-validator';
-import { UpdateSocialDto } from 'src/social/dto/updateSocial.dto';
 export enum UserStatusEnum {
   REGISTERED = 'REGISTERED',
   COMPLETED = 'COMPLETED',
