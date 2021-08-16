@@ -40,7 +40,7 @@ export class SocialController {
     @Param() { socialId }: SocialIdDTO,
   ): Observable<IResponse<ISocial>> {
     return from(
-      this.socialService.getSocial({
+      this.socialService.getOwnSocial({
         _id: socialId,
         userId: req.user._id,
       }),
@@ -51,7 +51,7 @@ export class SocialController {
   @UseGuards(AuthGuard)
   getOwnSocials(@Req() req: IReq): Observable<IResponse<ISocial>> {
     return from(
-      this.socialService.getSocials({
+      this.socialService.getOwnSocials({
         userId: req.user._id,
       }),
     );
@@ -87,14 +87,14 @@ export class SocialController {
     );
   }
 
-  @Delete('/social/:socialId')
+  @Delete('/:socialId')
   @UseGuards(AuthGuard)
   DeleteSocial(
     @Req() req: IReq,
     @Param() { socialId }: SocialIdDTO,
   ): Observable<IResponse<ISocial>> {
     return from(
-      this.socialService.deleteSocial({
+      this.socialService.deleteOwnSocial({
         _id: socialId,
         userId: req.user._id,
       }),
