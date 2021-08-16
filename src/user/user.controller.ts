@@ -4,8 +4,8 @@ import { from, Observable } from 'rxjs';
 import { IReq } from 'src/common/interface/req.interface';
 import { IResponse } from 'src/common/interface/responser.interface';
 import { AuthGuard } from 'src/auth/guard/auth.guard';
-import { UserProfileUpdateDTO } from './dto/update.profile.dto';
-import { IProfileUpdateResult, IUserService } from './interface/user.interface';
+import { UserUpdateLimitDTO } from './dto/update.profile.dto';
+import { IUser, IUserService } from './interface/user.interface';
 
 @Controller('user')
 export class UserController {
@@ -20,14 +20,12 @@ export class UserController {
   @UseGuards(AuthGuard)
   updateProfile(
     @Req() req: IReq,
-    @Body() updateProfileBody: UserProfileUpdateDTO,
-  ): Observable<IResponse<IProfileUpdateResult>> {
-    console.log('user', req.user);
-
+    @Body() updateProfileBody: UserUpdateLimitDTO,
+  ): Observable<IResponse<IUser>> {
     return from(
       this.userService.updateProfile({
         ...updateProfileBody,
-        userId: req.user._id,
+        _id: req.user._id,
       }),
     );
   }

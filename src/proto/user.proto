@@ -3,7 +3,7 @@ syntax = "proto3";
 package  user.profile;
 
 
-message UserResult {
+message User {
   string _id = 1;
   string firstName = 2;
   string lastName = 3;
@@ -21,37 +21,22 @@ message UserResult {
     string message = 14 ;
 
 }
-message ProfileUpdateRequest {
-
-
+message UserUpdateLimitRequest {
   string firstName = 1;
   string lastName = 2;
   string email = 3;
   string profilePicture = 4;
-  string userId = 5;
+  string _id = 5;
 }
 
-message ProfileUpdateResponse {
+message UserUpdateResponse {
   bool success = 1;
   string message = 2;
-  ProfileUpdateResult data = 3;
+  User data = 3;
   
 }
 
-message ProfileUpdateResult {
-
-  string firstName = 1;
-  string lastName = 2;
-  string email = 3;
-  string profilePicture = 4;
-   //ERROR
-   int32 statusCode = 5 ;
-   string timestamp = 6 ;
-   string path = 7 ;
-   string message = 8 ;
-}
-
 service UserService {
-  rpc UpdateProfile (ProfileUpdateRequest) returns (ProfileUpdateResponse);
+  rpc UpdateProfile (UserUpdateLimitRequest) returns (UserUpdateResponse);
 
 }
