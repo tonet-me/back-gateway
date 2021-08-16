@@ -3,7 +3,6 @@ import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { Logger } from '@nestjs/common';
-import { NotFoundExceptionFilter } from './common/filter/notfound.filter';
 import { TransformInterceptor } from './common/interface/transform.response';
 import { AllExceptionsFilter } from './common/filter/allExceptions.filter';
 async function bootstrap() {
@@ -11,10 +10,7 @@ async function bootstrap() {
 
   const configService = app.get<ConfigService>(ConfigService);
 
-  app.useGlobalFilters(
-    new NotFoundExceptionFilter(),
-    new AllExceptionsFilter(),
-  );
+  app.useGlobalFilters(new AllExceptionsFilter());
   app.useGlobalInterceptors(new TransformInterceptor());
   app.useGlobalPipes(
     new ValidationPipe({
