@@ -21,11 +21,11 @@ export class AuthGuard implements CanActivate {
   canActivate(context: ExecutionContext): Observable<any> {
     const request = context.switchToHttp().getRequest();
     let authHeader = request.headers.authorization as string;
-    authHeader = authHeader.replace('Bearer ', '');
-
     if (!authHeader) {
       throw new BadRequestException('Authorization header not found.');
     }
+    authHeader = authHeader.replace('Bearer ', '');
+
     return from(
       this.authService.validateAccessToken({ accessToken: authHeader }),
     ).pipe(

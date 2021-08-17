@@ -1,11 +1,13 @@
 import { OmitType } from '@nestjs/mapped-types';
 import {
   IsBoolean,
+  IsDefined,
   IsEmail,
   IsEnum,
   IsOptional,
   IsString,
   IsUrl,
+  Matches,
 } from 'class-validator';
 export enum UserStatusEnum {
   REGISTERED = 'REGISTERED',
@@ -23,6 +25,11 @@ export class UserUpdateDTO {
   @IsOptional()
   @IsEmail()
   readonly email: string;
+
+  @IsOptional()
+  @IsString()
+  @Matches(/^(?=[a-zA-Z0-9._]{5,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/)
+  readonly userName: string;
 
   @IsOptional()
   @IsUrl()
@@ -51,3 +58,22 @@ export class UserUpdateLimitDTO extends OmitType(UserUpdateDTO, [
   'mobile',
   'email',
 ] as const) {}
+
+export class UserCompleteProfile {
+  @IsDefined()
+  @IsString()
+  readonly firstName: string;
+
+  @IsDefined()
+  @IsString()
+  readonly lastName: string;
+
+  @IsOptional()
+  @IsUrl()
+  readonly profilePicture: string;
+
+  @IsDefined()
+  @IsString()
+  @Matches(/^(?=[a-zA-Z0-9._]{5,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/)
+  readonly userName: string;
+}

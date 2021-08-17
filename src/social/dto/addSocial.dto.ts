@@ -1,16 +1,25 @@
 import {
   IsBoolean,
   IsDefined,
+  IsEnum,
   IsNotEmpty,
   IsOptional,
   IsString,
 } from 'class-validator';
 
+export enum SocialTitleEnum {
+  INSTAGRAM = 'instagram',
+  TWEETER = 'tweeter',
+  YOUTUBE = 'youtube',
+  WHATSAPP = 'whatsApp',
+  TELEGRAM = 'telegram',
+  LINKEDIN = 'linkedin',
+}
 export class AddSocialDto {
   @IsDefined()
-  @IsString()
+  @IsEnum(SocialTitleEnum)
   @IsNotEmpty()
-  readonly title: string;
+  readonly title: SocialTitleEnum;
 
   @IsDefined()
   @IsString()

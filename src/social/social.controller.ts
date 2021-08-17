@@ -19,6 +19,9 @@ import { IReq } from 'src/common/interface/req.interface';
 import { from, Observable } from 'rxjs';
 import { IResponse } from 'src/common/interface/responser.interface';
 import { SocialIdDTO } from './dto/socialId.dto';
+import { UserStatus } from 'src/auth/decorator/user.status';
+import { UserStatusEnum } from 'src/user/dto/update.profile.dto';
+import { UserStatusGuard } from 'src/auth/guard/userStatus.guard';
 
 @Controller('social')
 export class SocialController {
@@ -34,6 +37,8 @@ export class SocialController {
   }
 
   @Get('/:socialId')
+  @UseGuards(UserStatusGuard)
+  @UserStatus(UserStatusEnum.COMPLETED)
   @UseGuards(AuthGuard)
   getOwnSocial(
     @Req() req: IReq,
@@ -48,6 +53,8 @@ export class SocialController {
   }
 
   @Get('/')
+  @UseGuards(UserStatusGuard)
+  @UserStatus(UserStatusEnum.COMPLETED)
   @UseGuards(AuthGuard)
   getOwnSocials(@Req() req: IReq): Observable<IResponse<ISocial>> {
     return from(
@@ -58,11 +65,15 @@ export class SocialController {
   }
 
   @Post('/')
+  @UseGuards(UserStatusGuard)
+  @UserStatus(UserStatusEnum.COMPLETED)
   @UseGuards(AuthGuard)
   addSocial(
     @Req() req: IReq,
     @Body() addSocialBody: AddSocialDto,
   ): Observable<IResponse<ISocial>> {
+    console.log('ok');
+
     return from(
       this.socialService.addSocial({
         ...addSocialBody,
@@ -72,6 +83,8 @@ export class SocialController {
   }
 
   @Put('/:socialId')
+  @UseGuards(UserStatusGuard)
+  @UserStatus(UserStatusEnum.COMPLETED)
   @UseGuards(AuthGuard)
   updateSocial(
     @Req() req: IReq,
@@ -88,6 +101,8 @@ export class SocialController {
   }
 
   @Delete('/:socialId')
+  @UseGuards(UserStatusGuard)
+  @UserStatus(UserStatusEnum.COMPLETED)
   @UseGuards(AuthGuard)
   DeleteSocial(
     @Req() req: IReq,

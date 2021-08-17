@@ -13,12 +13,14 @@ message User {
   bool isActive = 7;
   string status = 8;
   bool emailVerify = 9;
-  string profilePicture = 10;
+  bool emailVisible = 10;
+  bool mobileVisible = 11;
+  string profilePicture = 12;
     //ERROR
-    int32 statusCode = 11 ;
-    string timestamp = 12 ;
-    string path = 13 ;
-    string message = 14 ;
+    int32 statusCode = 13 ;
+    string timestamp = 14 ;
+    string path = 15 ;
+    string message = 16 ;
 
 }
 message UserUpdateLimitRequest {
@@ -29,14 +31,31 @@ message UserUpdateLimitRequest {
   string _id = 5;
 }
 
-message UserUpdateResponse {
+message UserResponse {
   bool success = 1;
   string message = 2;
   User data = 3;
   
 }
+message SetVisibleInfoRequest {
+  string _id = 1;
+  bool mobileVisible = 2;
+  bool emailVisible = 3;
+}
+message UserId {
+  string _id = 1;
+}
+
+message CompleteProfileRequest{
+  string _id = 1;
+  string firstName = 2;
+  string lastName = 3;
+  string userName = 4;
+  string profilePicture = 5;
+}
 
 service UserService {
-  rpc UpdateProfile (UserUpdateLimitRequest) returns (UserUpdateResponse);
-
+  rpc UpdateProfile (UserUpdateLimitRequest) returns (UserResponse);
+  rpc SetVisibleInfo (SetVisibleInfoRequest) returns (UserResponse);
+  rpc CompleteProfile (CompleteProfileRequest) returns (UserResponse);
 }
