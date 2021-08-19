@@ -72,8 +72,6 @@ export class SocialController {
     @Req() req: IReq,
     @Body() addSocialBody: AddSocialDto,
   ): Observable<IResponse<ISocial>> {
-    console.log('ok');
-
     return from(
       this.socialService.addSocial({
         ...addSocialBody,

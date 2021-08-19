@@ -30,7 +30,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
       success: false,
       message: errorName,
       data: {
-        statusCode: status,
+        errorCode: status,
         timestamp: new Date().toISOString(),
         path: request.url,
         message,

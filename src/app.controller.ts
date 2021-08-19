@@ -49,9 +49,7 @@ export class AppController {
             map((socialsResult) => {
               return {
                 userResult: userResult.data,
-                socialsResult: socialsResult.success
-                  ? socialsResult
-                  : { ...socialsResult, data: [] },
+                socialsResult: socialsResult,
               };
             }),
           );

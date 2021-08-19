@@ -26,14 +26,13 @@ export class TransformInterceptor<T>
       map((data) => {
         if (data.status)
           context.switchToHttp().getResponse().status(data.status);
-        if (!data.success && data.data?.statusCode)
-          context.switchToHttp().getResponse().status(data.data.statusCode);
+        if (!data.success)
+          context.switchToHttp().getResponse().status(data.data.errorCode);
 
         return {
           success: data.success,
           message: data.message || '',
           data: data.data || {},
-          status: data.status,
         };
       }),
     );
