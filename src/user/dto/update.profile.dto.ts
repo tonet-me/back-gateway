@@ -57,6 +57,7 @@ export class UserUpdateLimitDTO extends OmitType(UserUpdateDTO, [
   'emailVerify',
   'mobile',
   'email',
+  'isActive',
 ] as const) {}
 
 export class UserCompleteProfile {
