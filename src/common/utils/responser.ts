@@ -9,11 +9,4 @@ export class Responser<T> {
     this.data = result;
     this.status = status;
   }
-  t;
-}
-
-export interface ServiceResponse<T> {
-  success: boolean;
-  message: string;
-  result: T;
 }

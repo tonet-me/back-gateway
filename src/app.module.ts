@@ -5,6 +5,7 @@ import serverConf from 'config/server.conf';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { SocialModule } from './social/social.module';
+import { AppController } from './app.controller';
 
 @Module({
   imports: [
@@ -17,5 +18,6 @@ import { SocialModule } from './social/social.module';
     UserModule,
     SocialModule,
   ],
+  controllers: [AppController],
 })
 export class AppModule {}

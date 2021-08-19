@@ -115,4 +115,15 @@ export class SocialController {
       }),
     );
   }
+
+  @Get('/:socialId')
+  getSocialPublic(
+    @Param() { socialId }: SocialIdDTO,
+  ): Observable<IResponse<ISocial>> {
+    return from(
+      this.socialService.getSocialPublic({
+        _id: socialId,
+      }),
+    );
+  }
 }

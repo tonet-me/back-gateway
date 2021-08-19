@@ -6,6 +6,7 @@ export interface IUserService {
   updateProfile(data: IUser): Observable<IResponse<IUser>>;
   setVisibleInfo(data: IUser): Observable<IResponse<IUser>>;
   completeProfile(data: IUser): Observable<IResponse<IUser>>;
+  getUserPublic(data: IUser): Observable<IResponse<IUser>>;
 }
 export interface IUser {
   readonly _id?: string;

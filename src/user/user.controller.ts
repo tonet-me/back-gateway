@@ -10,7 +10,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ClientGrpc } from '@nestjs/microservices';
-import { from, Observable } from 'rxjs';
+import { from, map, merge, Observable } from 'rxjs';
 import { IReq } from 'src/common/interface/req.interface';
 import { IResponse } from 'src/common/interface/responser.interface';
 import { AuthGuard } from 'src/auth/guard/auth.guard';
@@ -24,6 +24,8 @@ import { UserIdDTO } from './dto/userId.dto';
 import { UserStatusGuard } from 'src/auth/guard/userStatus.guard';
 import { UserStatus } from 'src/auth/decorator/user.status';
 import { VisibleInfoDTO } from './dto/visible.info.dto';
+import { UserNameDTO } from './dto/userName.dto';
+import { forkJoin } from 'rxjs';
 
 @Controller('user')
 export class UserController {
@@ -81,5 +83,33 @@ export class UserController {
         _id: req.user._id,
       }),
     );
+  }
+
+  @Get('/:userName')
+  getUserPublic(
+    @Param() { userName }: UserNameDTO,
+  ): Observable<IResponse<any>> {
+    const userresult = from(
+      this.userService.getUserPublic({
+        userName,
+      }),
+    );
+    const userresult2 = from(
+      this.userService.getUserPublic({
+        userName,
+      }),
+    );
+    return merge(userresult, userresult2);
+    // return forkJoin([
+    //   from(
+    //     this.userService.getUser({
+    //       userName,
+    //     }),
+    //   ),
+    // ]).pipe(
+    //   merge((data) => {
+    //     return data;
+    //   }),
+    // );
   }
 }

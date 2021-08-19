@@ -18,5 +18,6 @@ import { SocialController } from './social.controller';
     ]),
   ],
   controllers: [SocialController],
+  exports: [ClientsModule],
 })
 export class SocialModule {}

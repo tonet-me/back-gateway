@@ -53,9 +53,13 @@ message CompleteProfileRequest{
   string userName = 4;
   string profilePicture = 5;
 }
+message GetUserPublicRequest{
+  string userName = 1 ;
+}
 
 service UserService {
   rpc UpdateProfile (UserUpdateLimitRequest) returns (UserResponse);
   rpc SetVisibleInfo (SetVisibleInfoRequest) returns (UserResponse);
   rpc CompleteProfile (CompleteProfileRequest) returns (UserResponse);
+  rpc GetUserPublic (GetUserPublicRequest) returns (UserResponse);
 }

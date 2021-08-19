@@ -11,6 +11,7 @@ export interface IResponse<T> {
   success: boolean;
   message: string;
   data: T;
+  status?: number;
 }
 
 @Injectable()
@@ -25,13 +26,14 @@ export class TransformInterceptor<T>
       map((data) => {
         if (data.status)
           context.switchToHttp().getResponse().status(data.status);
-        if (!data.success && data.data.statusCode)
+        if (!data.success && data.data?.statusCode)
           context.switchToHttp().getResponse().status(data.data.statusCode);
 
         return {
           success: data.success,
           message: data.message || '',
           data: data.data || {},
+          status: data.status,
         };
       }),
     );

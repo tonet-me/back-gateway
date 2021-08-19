@@ -7,6 +7,7 @@ export interface ISocialService {
   getOwnSocial(data: ISocial): Observable<IResponse<ISocial>>;
   getOwnSocials(data: ISocial): Observable<IResponse<ISocial>>;
   deleteOwnSocial(data: ISocial): Observable<IResponse<ISocial>>;
+  getSocialPublic(data: ISocial): Observable<IResponse<ISocial>>;
 }
 
 export interface ISocial {

@@ -42,6 +42,10 @@ message GetOwnSocial{
     string userId = 2;
 }
 
+message GetSocialPublic{
+  string userId = 1;
+}
+
 message GetOwnSocials{
     string userId = 1;
 }
@@ -59,10 +63,11 @@ message SocialsResponse {
 }
 
 service SocialService {
-  rpc addSocial (AddSocialRequest) returns (SocialResponse);
-  rpc updateSocial (UpdateSocialRequest) returns (SocialResponse);
-  rpc getOwnSocial (GetOwnSocial) returns (SocialResponse);
-  rpc getOwnSocials (GetOwnSocials) returns (SocialsResponse);
-  rpc deleteOwnSocial (GetOwnSocial) returns (SocialResponse);
+  rpc AddSocial (AddSocialRequest) returns (SocialResponse);
+  rpc UpdateSocial (UpdateSocialRequest) returns (SocialResponse);
+  rpc GetOwnSocial (GetOwnSocial) returns (SocialResponse);
+  rpc GetOwnSocials (GetOwnSocials) returns (SocialsResponse);
+  rpc DeleteOwnSocial (GetOwnSocial) returns (SocialResponse);
+  rpc GetSocialPublic (GetSocialPublic) returns (SocialsResponse);
 
 }
