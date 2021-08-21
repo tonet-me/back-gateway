@@ -71,7 +71,10 @@ export class AppController {
   @Get(':file')
   @HttpCode(201)
   @Header('Content-Type', 'plain/tet')
-  @Header('Content-Disposition', 'attachment; filename=test.pdf')
+  @Header(
+    'Content-Disposition',
+    'attachment; filename=loaderio-169937cb13dd33e0b33b75df8a4a2bbe.txt',
+  )
   test() {
     console.log('ok');
     return createReadStream(

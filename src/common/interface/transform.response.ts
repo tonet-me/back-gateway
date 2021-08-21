@@ -27,7 +27,10 @@ export class TransformInterceptor<T>
         if (data.status)
           context.switchToHttp().getResponse().status(data.status);
         if (!data.success)
-          context.switchToHttp().getResponse().status(data.data.errorCode);
+          context
+            .switchToHttp()
+            .getResponse()
+            .status(data.data?.errorCode || 200);
 
         return {
           success: data.success,
