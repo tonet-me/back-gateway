@@ -69,16 +69,9 @@ export class AppController {
   }
 
   @Get('/loaderio-169937cb13dd33e0b33b75df8a4a2bbe.txt')
-  @HttpCode(201)
-  @Header('Content-Type', 'plain/tet')
-  @Header(
-    'Content-Disposition',
-    'attachment; filename=loaderio-169937cb13dd33e0b33b75df8a4a2bbe.txt',
-  )
   test() {
-    console.log('ok');
-    return createReadStream(
-      join(__dirname, '..', '/loaderio-169937cb13dd33e0b33b75df8a4a2bbe.txt'),
-    );
+    return new Responser(true, 'okkk', {
+      text: 'loaderio-169937cb13dd33e0b33b75df8a4a2bbe',
+    });
   }
 }

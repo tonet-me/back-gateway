@@ -24,13 +24,11 @@ export class TransformInterceptor<T>
   ): Observable<IResponse<T>> {
     return next.handle().pipe(
       map((data) => {
+        if (data?.message == 'okkk') return data.data.text;
         if (data.status)
           context.switchToHttp().getResponse().status(data.status);
         if (!data.success)
-          context
-            .switchToHttp()
-            .getResponse()
-            .status(data.data?.errorCode || 200);
+          context.switchToHttp().getResponse().status(data.data?.errorCode);
 
         return {
           success: data.success,
