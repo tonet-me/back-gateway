@@ -13,11 +13,12 @@ message UserResult {
   string status = 8;
   bool emailVerify = 9;
   string profilePicture = 10;
+  string title = 11;
     //ERROR
-    int32 errorCode = 11 ;
-    string timestamp = 12 ;
-    string path = 13 ;
-    string message = 14 ;
+    int32 errorCode = 12 ;
+    string timestamp = 13 ;
+    string path = 14 ;
+    string message = 15 ;
 
 }
 message MakeOtpRequest {
