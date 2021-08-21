@@ -16,11 +16,7 @@ export enum UserStatusEnum {
 export class UserUpdateDTO {
   @IsOptional()
   @IsString()
-  readonly firstName: string;
-
-  @IsOptional()
-  @IsString()
-  readonly lastName: string;
+  readonly fullName: string;
 
   @IsOptional()
   @IsString()
@@ -66,11 +62,11 @@ export class UserUpdateLimitDTO extends OmitType(UserUpdateDTO, [
 export class UserCompleteProfile {
   @IsDefined()
   @IsString()
-  readonly firstName: string;
+  readonly fullName: string;
 
-  @IsDefined()
+  @IsOptional()
   @IsString()
-  readonly lastName: string;
+  readonly title: string;
 
   @IsOptional()
   @IsUrl()

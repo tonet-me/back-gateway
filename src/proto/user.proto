@@ -5,32 +5,30 @@ package  user.profile;
 
 message User {
   string _id = 1;
-  string firstName = 2;
-  string lastName = 3;
-  string email = 4;
-  string mobile = 5;
-  string userName = 6;
-  bool isActive = 7;
-  string status = 8;
-  bool emailVerify = 9;
-  bool emailVisible = 10;
-  bool mobileVisible = 11;
-  string profilePicture = 12;
-  string title = 13;
+  string fullName = 2;
+  string email = 3;
+  string mobile = 4;
+  string userName = 5;
+  bool isActive = 6;
+  string status = 7;
+  bool emailVerify = 8;
+  bool emailVisible = 9;
+  bool mobileVisible = 10;
+  string profilePicture = 11;
+  string title = 12;
     //ERROR
-    int32 errorCode = 14 ;
-    string timestamp = 15 ;
-    string path = 16 ;
-    string message = 17 ;
+    int32 errorCode = 13 ;
+    string timestamp = 14 ;
+    string path = 15 ;
+    string message = 16 ;
 
 }
 message UserUpdateLimitRequest {
-  string firstName = 1;
-  string lastName = 2;
-  string email = 3;
-  string profilePicture = 4;
-  string _id = 5;
-  string title = 6;
+  string fullName = 1;
+  string email = 2;
+  string profilePicture = 3;
+  string _id = 4;
+  string title = 5;
 }
 
 message UserResponse {
@@ -51,11 +49,10 @@ message UserId {
 
 message CompleteProfileRequest{
   string _id = 1;
-  string firstName = 2;
-  string lastName = 3;
-  string userName = 4;
-  string profilePicture = 5;
-  string title = 6 ;
+  string fullName = 2;
+  string userName = 3;
+  string profilePicture = 4;
+  string title = 5 ;
 }
 message GetUserPublicRequest{
   string userName = 1 ;
