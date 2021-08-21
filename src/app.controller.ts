@@ -68,7 +68,7 @@ export class AppController {
     );
   }
 
-  @Get(':file')
+  @Get('/loaderio-169937cb13dd33e0b33b75df8a4a2bbe.txt')
   @HttpCode(201)
   @Header('Content-Type', 'plain/tet')
   @Header(
