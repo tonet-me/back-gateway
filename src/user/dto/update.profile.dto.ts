@@ -1,4 +1,5 @@
 import { OmitType } from '@nestjs/mapped-types';
+import { Type } from 'class-transformer';
 import {
   IsBoolean,
   IsDefined,
@@ -8,11 +9,27 @@ import {
   IsString,
   IsUrl,
   Matches,
+  ValidateNested,
 } from 'class-validator';
 export enum UserStatusEnum {
   REGISTERED = 'REGISTERED',
   COMPLETED = 'COMPLETED',
 }
+
+class ContactDTO {
+  @IsOptional()
+  @IsString()
+  readonly phone: string;
+
+  @IsOptional()
+  @IsString()
+  readonly fax: string;
+
+  @IsOptional()
+  @IsString()
+  readonly address: string;
+}
+
 export class UserUpdateDTO {
   @IsOptional()
   @IsString()
@@ -50,6 +67,13 @@ export class UserUpdateDTO {
   @IsOptional()
   @IsEnum(UserStatusEnum)
   readonly status: UserStatusEnum;
+
+  @IsOptional()
+  @ValidateNested({
+    each: true,
+  })
+  @Type(() => ContactDTO)
+  readonly contact: ContactDTO;
 }
 
 export class UserUpdateLimitDTO extends OmitType(UserUpdateDTO, [

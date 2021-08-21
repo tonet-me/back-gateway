@@ -15,15 +15,22 @@ message UserResult {
   bool mobileVisible = 10;
   string profilePicture = 11;
   string title = 12;
-    //ERROR
-    int32 errorCode = 13 ;
-    string timestamp = 14 ;
-    string path = 15 ;
-    string message = 16 ;
+  Contact contact = 13;
 
+    //ERROR
+    int32 errorCode = 14 ;
+    string timestamp = 15 ;
+    string path = 16 ;
+    string message = 17 ;
 }
 message MakeOtpRequest {
   string phoneNumber = 1;
+}
+
+message Contact{
+  string phone =1 ;
+  string fax =2 ;
+  string address =3 ;
 }
 
 message MakeOtpResponse {

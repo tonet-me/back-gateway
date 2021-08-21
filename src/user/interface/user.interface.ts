@@ -8,6 +8,11 @@ export interface IUserService {
   completeProfile(data: IUser): Observable<IResponse<IUser>>;
   getUserPublic(data: IUser): Observable<IResponse<IUser>>;
 }
+interface IContact {
+  readonly phone: string;
+  readonly fax: string;
+  readonly address: string;
+}
 export interface IUser {
   readonly _id?: string;
   readonly fullName?: string;
@@ -19,4 +24,5 @@ export interface IUser {
   readonly status?: UserStatusEnum;
   readonly emailVerify?: boolean;
   readonly profilePicture?: string;
+  readonly contact?: IContact;
 }
