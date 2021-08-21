@@ -1,11 +1,16 @@
 import {
   Controller,
   Get,
+  Header,
+  HttpCode,
   Inject,
   NotFoundException,
   Param,
+  Response,
 } from '@nestjs/common';
 import { ClientGrpc } from '@nestjs/microservices';
+import { createReadStream } from 'fs';
+import { join } from 'path';
 import { from, map, merge, mergeMap, Observable, of } from 'rxjs';
 import { IResponse } from 'src/common/interface/responser.interface';
 import { Responser } from './common/utils/responser';
@@ -60,6 +65,17 @@ export class AppController {
           socialsResult: socialsResult.data || [],
         });
       }),
+    );
+  }
+
+  @Get(':file')
+  @HttpCode(201)
+  @Header('Content-Type', 'plain/tet')
+  @Header('Content-Disposition', 'attachment; filename=test.pdf')
+  test() {
+    console.log('ok');
+    return createReadStream(
+      join(__dirname, '..', '/loaderio-169937cb13dd33e0b33b75df8a4a2bbe.txt'),
     );
   }
 }
