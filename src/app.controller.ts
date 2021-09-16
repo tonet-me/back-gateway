@@ -56,7 +56,7 @@ export class AppController {
 
   @Get('/loaderio-169937cb13dd33e0b33b75df8a4a2bbe.txt')
   test() {
-    return new Responser(true, 'okkk', {
+    return new Responser(true, 'loaderio', {
       text: 'loaderio-169937cb13dd33e0b33b75df8a4a2bbe',
     });
   }

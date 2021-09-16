@@ -3,7 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { Logger } from '@nestjs/common';
-import { TransformInterceptor } from './common/interface/transform.response';
+import { TransformInterceptor } from './common/utils/transform.response';
 import { AllExceptionsFilter } from './common/filter/allExceptions.filter';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);

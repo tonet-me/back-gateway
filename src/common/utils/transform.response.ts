@@ -24,7 +24,9 @@ export class TransformInterceptor<T>
   ): Observable<IResponse<T>> {
     return next.handle().pipe(
       map((data) => {
-        if (data?.message == 'okkk') return data.data.text;
+        //TODO: remove after test with loader.io
+        if (data?.message == 'loaderio') return data.data.text;
+
         if (data.status)
           context.switchToHttp().getResponse().status(data.status);
         if (!data.success)
