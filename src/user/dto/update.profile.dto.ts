@@ -1,5 +1,4 @@
 import { OmitType } from '@nestjs/mapped-types';
-import { Type } from 'class-transformer';
 import {
   IsBoolean,
   IsDefined,
@@ -9,25 +8,10 @@ import {
   IsString,
   IsUrl,
   Matches,
-  ValidateNested,
 } from 'class-validator';
 export enum UserStatusEnum {
-  REGISTERED = 'REGISTERED',
-  COMPLETED = 'COMPLETED',
-}
-
-class ContactDTO {
-  @IsOptional()
-  @IsString()
-  readonly phone: string;
-
-  @IsOptional()
-  @IsString()
-  readonly fax: string;
-
-  @IsOptional()
-  @IsString()
-  readonly address: string;
+  REGISTERED = 'registered',
+  COMPLETED = 'completed',
 }
 
 export class UserUpdateDTO {
@@ -35,45 +19,33 @@ export class UserUpdateDTO {
   @IsString()
   readonly fullName: string;
 
-  @IsOptional()
   @IsString()
-  readonly title: string;
-
   @IsOptional()
-  @IsEmail()
-  readonly email: string;
-
-  @IsOptional()
-  @IsString()
-  @Matches(/^(?=[a-zA-Z0-9._]{5,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/)
-  readonly userName: string;
-
-  @IsOptional()
-  @IsUrl()
-  readonly profilePicture: string;
-
-  @IsOptional()
-  @IsString()
   readonly mobile: string;
 
+  @IsEmail()
   @IsOptional()
+  readonly email: string;
+
+  @IsEmail()
+  @IsOptional()
+  readonly emailVerify: string;
+
   @IsBoolean()
+  @IsOptional()
+  readonly verified: boolean;
+
+  @IsUrl()
+  @IsOptional()
+  readonly photo: string;
+
+  @IsBoolean()
+  @IsOptional()
   readonly isActive: boolean;
 
-  @IsOptional()
-  @IsBoolean()
-  readonly emailVerify: boolean;
-
-  @IsOptional()
   @IsEnum(UserStatusEnum)
-  readonly status: UserStatusEnum;
-
   @IsOptional()
-  @ValidateNested({
-    each: true,
-  })
-  @Type(() => ContactDTO)
-  readonly contact: ContactDTO;
+  readonly status: UserStatusEnum;
 }
 
 export class UserUpdateLimitDTO extends OmitType(UserUpdateDTO, [
@@ -81,6 +53,7 @@ export class UserUpdateLimitDTO extends OmitType(UserUpdateDTO, [
   'emailVerify',
   'mobile',
   'isActive',
+  'verified',
 ] as const) {}
 
 export class UserCompleteProfile {
@@ -89,15 +62,10 @@ export class UserCompleteProfile {
   readonly fullName: string;
 
   @IsOptional()
-  @IsString()
-  readonly title: string;
-
-  @IsOptional()
   @IsUrl()
-  readonly profilePicture: string;
+  readonly photo: string;
 
-  @IsDefined()
-  @IsString()
-  @Matches(/^(?=[a-zA-Z0-9._]{5,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/)
-  readonly userName: string;
+  @IsEmail()
+  @IsOptional()
+  readonly email: string;
 }

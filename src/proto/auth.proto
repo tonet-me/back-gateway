@@ -6,32 +6,22 @@ message UserResult {
   string _id = 1;
   string fullName = 2;
   string email = 3;
-  string mobile = 4;
-  string userName = 5;
-  bool isActive = 6;
-  string status = 7;
-  bool emailVerify = 8;
-  bool emailVisible = 9;
-  bool mobileVisible = 10;
-  string profilePicture = 11;
-  string title = 12;
-  Contact contact = 13;
-
+  bool emailVerify = 4;
+  string mobile = 5;
+  string photo = 6;
+  bool isActive = 7;
+  bool verified = 8;
+  string status = 9;
     //ERROR
-    int32 errorCode = 14 ;
-    string timestamp = 15 ;
-    string path = 16 ;
-    string message = 17 ;
+    int32 errorCode = 10 ;
+    string timestamp = 11 ;
+    string path = 12 ;
+    string message = 13 ;
 }
 message MakeOtpRequest {
   string phoneNumber = 1;
 }
 
-message Contact{
-  string phone =1 ;
-  string fax =2 ;
-  string address =3 ;
-}
 
 message MakeOtpResponse {
   bool success = 1;

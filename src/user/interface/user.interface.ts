@@ -3,26 +3,18 @@ import { IResponse } from 'src/common/interface/responser.interface';
 import { UserStatusEnum } from '../dto/update.profile.dto';
 
 export interface IUserService {
-  updateProfile(data: IUser): Observable<IResponse<IUser>>;
-  setVisibleInfo(data: IUser): Observable<IResponse<IUser>>;
-  completeProfile(data: IUser): Observable<IResponse<IUser>>;
-  getUserPublic(data: IUser): Observable<IResponse<IUser>>;
+  updateProfile(data: Partial<IUser>): Observable<IResponse<IUser>>;
+  completeProfile(data: Partial<IUser>): Observable<IResponse<IUser>>;
 }
-interface IContact {
-  readonly phone: string;
-  readonly fax: string;
-  readonly address: string;
-}
+
 export interface IUser {
-  readonly _id?: string;
-  readonly fullName?: string;
-  readonly title?: string;
-  readonly email?: string;
-  readonly mobile?: string;
-  readonly userName?: string;
-  readonly isActive?: boolean;
-  readonly status?: UserStatusEnum;
-  readonly emailVerify?: boolean;
-  readonly profilePicture?: string;
-  readonly contact?: IContact;
+  readonly _id: string;
+  readonly fullName: string;
+  readonly mobile: string;
+  readonly email: string;
+  readonly emailVerify: boolean;
+  readonly verified: boolean;
+  readonly photo: string;
+  readonly isActive: boolean;
+  readonly status: UserStatusEnum;
 }
