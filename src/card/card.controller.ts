@@ -56,7 +56,7 @@ export class CardController {
   @UseGuards(UserStatusGuard)
   @UserStatus(UserStatusEnum.COMPLETED)
   @UseGuards(AuthGuard)
-  getOwnCards(@Req() req: IReq): Observable<IResponse<ICard>> {
+  getOwnCards(@Req() req: IReq): Observable<IResponse<ICard[]>> {
     return from(
       this.cardService.getOwnCards({
         userId: req.user._id,
