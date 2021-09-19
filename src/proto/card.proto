@@ -1,0 +1,140 @@
+syntax = "proto3";
+
+package  user.card;
+
+
+message Phone{
+  string title = 1;
+  string content = 2;
+  int32 order = 3;
+}
+
+message Social{
+  string title = 1;
+  string content = 2;
+  int32 order = 3;
+}
+
+message Mail{
+  string content = 1;
+  int32 order = 2;
+}
+message Location{
+  repeated int32 coordinates = 1;
+  string type =2;
+}
+
+message Address{
+  string title = 1;
+  string country = 2;
+  string city = 3;
+  string address = 4;
+  Location location = 5;
+  int32 order = 6;
+}
+
+
+message Card {
+  string _id = 1;
+  string userId = 2;
+  string name = 3;
+  string title = 4;
+  string about = 5;
+  string photo = 6;
+  string website = 7;
+  string qrcode = 8;
+  string userName = 9;
+  repeated Phone phones = 10;
+  repeated Social socials = 11;
+  repeated Mail mails = 12;
+  repeated Address addresses = 13;
+  string isActive = 14;
+  string verified = 15;
+    //ERROR
+    int32 errorCode = 16 ;
+    string timestamp = 17 ;
+    string path = 18 ;
+    string message = 19 ;
+}
+
+message AddCardRequest {
+  string userId = 1;
+  string name = 2;
+  string title = 3;
+  string about = 4;
+  string photo = 5;
+  string website = 6;
+  string qrcode = 7;
+  string userName = 8;
+  repeated Phone phones = 9;
+  repeated Social socials = 10;
+  repeated Mail mails = 11;
+  repeated Address addresses = 12;
+  string isActive = 13;
+  string verified = 14;
+  }
+
+message UpdateCardRequest {
+  string _id = 1;
+  string userId = 2;
+  string title = 3;
+  string about = 4;
+  string photo = 5;
+  string website = 6;
+  string qrcode = 7;
+  repeated Phone phones = 8;
+  repeated Social socials = 9;
+  repeated Mail mails = 10;
+  repeated Address addresses = 11;
+  string isActive = 12;
+  string verified = 13;
+}
+
+message UpdateBasicInfoCardRequest {
+  string _id = 1;
+  string userId = 2;
+  string name = 3;
+  string title = 4;
+  string about = 5;
+  string photo = 6;
+  string userName = 7;
+}
+
+message DeleteCard{
+    string _id = 1;
+    string userId = 2;
+}
+
+message GetOwnCard{
+    string _id = 1;
+    string userId = 2;
+}
+
+message GetOwnCards{
+    string userId = 1;
+}
+
+message CardResponse {
+  bool success = 1;
+  string message = 2;
+  Card data = 3;
+  int32 status = 4;
+  
+}
+
+message CardsResponse {
+  bool success = 1;
+  string message = 2;
+  repeated Card data = 3;
+  int32 status = 4;
+
+}
+
+service CardService {
+  rpc AddCard (AddCardRequest) returns (CardResponse);
+  rpc UpdateCard (UpdateCardRequest) returns (CardResponse);
+  rpc UpdateBasicInfoCard (UpdateBasicInfoCardRequest) returns (CardResponse);
+  rpc GetOwnCard (GetOwnCard) returns (CardResponse);
+  rpc GetOwnCards (GetOwnCards) returns (CardsResponse);
+  rpc DeleteOwnCard (GetOwnCard) returns (CardResponse);
+}

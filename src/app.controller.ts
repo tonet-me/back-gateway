@@ -1,24 +1,23 @@
 import { Controller, Get, Inject } from '@nestjs/common';
 import { ClientGrpc } from '@nestjs/microservices';
 import { Responser } from './common/utils/responser';
-import { ISocialService } from './social/interface/social.interface';
+import { ICardService } from './card/interface/card.interface';
 import { IUserService } from './user/interface/user.interface';
 
 @Controller()
 export class AppController {
   private userService: IUserService;
-  private socialService: ISocialService;
+  private cardService: ICardService;
 
   constructor(
     @Inject('USER_PACKAGE') private userClient: ClientGrpc,
-    @Inject('SOCIAL_PACKAGE')
-    private readonly socialClient: ClientGrpc,
+    @Inject('CARD_PACKAGE')
+    private readonly cardClient: ClientGrpc,
   ) {}
 
   onModuleInit() {
     this.userService = this.userClient.getService<IUserService>('UserService');
-    this.socialService =
-      this.socialClient.getService<ISocialService>('SocialService');
+    this.cardService = this.cardClient.getService<ICardService>('CardService');
   }
 
   // @Get('un/:userName')

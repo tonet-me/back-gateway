@@ -1,23 +1,23 @@
 import { Module } from '@nestjs/common';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { join } from 'path';
-import { SocialController } from './social.controller';
+import { CardController } from './card.controller';
 
 @Module({
   imports: [
     ClientsModule.register([
       {
-        name: 'SOCIAL_PACKAGE',
+        name: 'CARD_PACKAGE',
         transport: Transport.GRPC,
         options: {
-          package: ['user.social'],
-          protoPath: join(__dirname, '../../proto/social.proto'),
+          package: ['user.card'],
+          protoPath: join(__dirname, '../../proto/card.proto'),
           url: 'localhost:50052',
         },
       },
     ]),
   ],
-  controllers: [SocialController],
+  controllers: [CardController],
   exports: [ClientsModule],
 })
-export class SocialModule {}
+export class CardModule {}

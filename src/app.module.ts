@@ -4,7 +4,7 @@ import dbConf from 'config/db.conf';
 import serverConf from 'config/server.conf';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
-import { SocialModule } from './social/social.module';
+import { CardModule } from './card/card.module';
 import { AppController } from './app.controller';
 
 @Module({
@@ -16,7 +16,7 @@ import { AppController } from './app.controller';
     }),
     AuthModule,
     UserModule,
-    SocialModule,
+    CardModule,
   ],
   controllers: [AppController],
 })

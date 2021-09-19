@@ -6,7 +6,7 @@ import { Logger } from '@nestjs/common';
 import { TransformInterceptor } from './common/utils/transform.response';
 import { AllExceptionsFilter } from './common/filter/allExceptions.filter';
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { cors: true });
 
   const configService = app.get<ConfigService>(ConfigService);
 
