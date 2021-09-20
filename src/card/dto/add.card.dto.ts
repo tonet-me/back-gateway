@@ -12,6 +12,7 @@ import {
   IsOptional,
   IsString,
   IsUrl,
+  Matches,
   MinLength,
   ValidateNested,
 } from 'class-validator';
@@ -141,8 +142,10 @@ export class AddCardDto {
 
   @IsDefined()
   @IsNotEmpty()
-  @IsString()
-  @MinLength(5)
+  // @IsString()
+  @Matches(/^(?=[a-zA-Z0-9_]{5,30}$)(?!.*[.]{2})[^.].*[^.]$/, {
+    message: 'username must be _ Alphabets Numbers',
+  })
   readonly userName: string;
 
   @IsOptional()
