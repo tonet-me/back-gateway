@@ -5,6 +5,7 @@ import {
   IsArray,
   isArray,
   IsDefined,
+  IsEmail,
   IsEnum,
   IsMongoId,
   IsNotEmpty,
@@ -13,7 +14,6 @@ import {
   IsString,
   IsUrl,
   Matches,
-  MinLength,
   ValidateNested,
 } from 'class-validator';
 import { SocialTitleEnum } from '../enum/socail.title.dto';
@@ -55,7 +55,7 @@ class SocialDTO {
 class MailDTO {
   @IsDefined()
   @IsNotEmpty()
-  @IsString()
+  @IsEmail()
   readonly content: string;
 
   @IsDefined()
