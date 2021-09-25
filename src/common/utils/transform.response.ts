@@ -27,8 +27,6 @@ export class TransformInterceptor<T>
         //TODO: remove after test with loader.io
         if (data?.message == 'loaderio') return data.data.text;
 
-        console.log(data);
-
         if (data.status)
           context.switchToHttp().getResponse().status(data.status);
         if (!data.success)

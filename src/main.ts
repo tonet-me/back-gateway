@@ -1,15 +1,20 @@
 import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
 import { Logger } from '@nestjs/common';
+import * as compression from 'compression';
+import * as helmet from 'helmet';
+
+import { AppModule } from './app.module';
 import { TransformInterceptor } from './common/utils/transform.response';
 import { AllExceptionsFilter } from './common/filter/allExceptions.filter';
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: true });
-
   const configService = app.get<ConfigService>(ConfigService);
 
+  app.use(helmet());
+  app.use(compression());
   app.useGlobalFilters(new AllExceptionsFilter());
   app.useGlobalInterceptors(new TransformInterceptor());
   app.useGlobalPipes(
@@ -22,6 +27,7 @@ async function bootstrap() {
 
   const PORT: number = configService.get('port');
   const HOST: string = configService.get('host');
+
   await app
     .listen(PORT)
     .then(() => {
@@ -34,4 +40,5 @@ async function bootstrap() {
       Logger.error(err, 'RUN API-GATEWAY SERVER FAILD');
     });
 }
+
 bootstrap();

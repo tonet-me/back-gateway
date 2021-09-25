@@ -13,8 +13,8 @@ export class AllExceptionsFilter implements ExceptionFilter {
     const response = ctx.getResponse();
     const request = ctx.getRequest();
     let status: number;
-    let errorName: string = '';
-    let message: string = '';
+    let errorName = '';
+    let message = '';
 
     if (exception instanceof HttpException) {
       const error: any = exception.getResponse().valueOf();

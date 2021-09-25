@@ -1,5 +1,5 @@
 export interface IResponse<T> {
   readonly success: boolean;
-  readonly message: string;
+  message: string;
   readonly data: T;
 }

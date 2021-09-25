@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import dbConf from 'config/db.conf';
 import serverConf from 'config/server.conf';
 import { AuthModule } from './auth/auth.module';
@@ -15,6 +15,7 @@ import { CountryModule } from './country/country.module';
       envFilePath: ['.env.dev', '.env.prod'],
       load: [serverConf, dbConf],
     }),
+
     AuthModule,
     UserModule,
     CardModule,
