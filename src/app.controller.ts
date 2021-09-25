@@ -1,23 +1,33 @@
-import { Controller, Get, Inject } from '@nestjs/common';
+import { Controller, Get, Inject, Param } from '@nestjs/common';
 import { ClientGrpc } from '@nestjs/microservices';
+import { from, Observable } from 'rxjs';
+import { AddCardDto } from './card/dto/add.card.dto';
+import { ICard, ICardService } from './card/interface/card.interface';
+import { IResponse } from './common/interface/responser.interface';
 import { Responser } from './common/utils/responser';
-import { ICardService } from './card/interface/card.interface';
-import { IUserService } from './user/interface/user.interface';
 
 @Controller()
 export class AppController {
-  private userService: IUserService;
   private cardService: ICardService;
 
   constructor(
-    @Inject('USER_PACKAGE') private userClient: ClientGrpc,
     @Inject('CARD_PACKAGE')
     private readonly cardClient: ClientGrpc,
   ) {}
 
   onModuleInit() {
-    this.userService = this.userClient.getService<IUserService>('UserService');
     this.cardService = this.cardClient.getService<ICardService>('CardService');
+  }
+
+  @Get('un/:userName')
+  public getPublicCard(
+    @Param() { userName }: Pick<AddCardDto, 'userName'>,
+  ): Observable<IResponse<ICard>> {
+    return from(
+      this.cardService.getPublicCard({
+        userName,
+      }),
+    );
   }
 
   // @Get('un/:userName')

@@ -109,7 +109,9 @@ message GetOwnCard{
     string _id = 1;
     string userId = 2;
 }
-
+message GetPublicCard{
+  string userName = 1;
+}
 message GetOwnCards{
     string userId = 1;
 }
@@ -136,5 +138,6 @@ service CardService {
   rpc UpdateBasicInfoCard (UpdateBasicInfoCardRequest) returns (CardResponse);
   rpc GetOwnCard (GetOwnCard) returns (CardResponse);
   rpc GetOwnCards (GetOwnCards) returns (CardsResponse);
+  rpc GetPublicCard (GetPublicCard) returns (CardResponse);
   rpc DeleteOwnCard (GetOwnCard) returns (CardResponse);
 }
