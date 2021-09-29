@@ -1,0 +1,97 @@
+syntax = "proto3";
+
+package  view.card;
+
+message Browser{
+    string name =1;
+    string version =2;
+    string major =3;
+}
+
+message Engine{
+    string name =1;
+    string version =2;
+}
+
+message OS{
+    string name =1;
+    string version =2;
+}
+
+message Device{
+    string vendor =1;
+    string model =2;
+    string type =3;
+}
+
+message CPU{
+    string architecture =1;
+}
+
+message ViewCard {
+  string _id = 1;
+  string cardId = 2;
+  string ua = 3;
+  Browser browser = 4;
+  Engine engine = 5;
+  OS os = 6;
+  Device device = 7;
+  CPU cpu = 8;
+    //ERROR
+    int32 errorCode = 9 ;
+    string timestamp = 10 ;
+    string path = 11 ;
+    string message = 12 ;
+}
+
+message AddViewCardRequest {
+    string cardId = 1;
+    string ua = 2;
+    Browser browser = 3;
+    Engine engine = 4;
+    OS os = 5;
+    Device device = 6;
+    CPU cpu = 7;
+}
+
+message ViewCardFilters{
+    OS os = 1;
+    string cardId = 2;
+}
+
+message PaginationOptions {
+  int32 page = 1;
+  int32 limit = 2;
+}
+
+message GetOwnViewsCardsRequest {
+  PaginationOptions paginationOptions = 1;
+  ViewCardFilters filters =2;
+}
+  
+message ViewCardResponse {
+  bool success = 1;
+  string message = 2;
+  ViewCard data = 3;
+  int32 status = 4;
+  
+}
+
+message ViewCardPaginate{
+  repeated ViewCard docs = 1;
+  string errorCode = 2;
+  string message = 3;
+}
+
+message viewsCardResponse {
+    bool success = 1;
+    string message = 2;
+    ViewCardPaginate data = 3;
+    int32 status = 4;
+    
+}
+
+service ViewCardService {
+  rpc AddViewCard (AddViewCardRequest) returns (ViewCardResponse);
+  rpc GetOwnViewsCard (GetOwnViewsCardsRequest) returns (viewsCardResponse);
+}

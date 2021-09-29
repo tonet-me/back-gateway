@@ -1,22 +1,35 @@
-import { Controller, Get, Headers, Inject, Param } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Headers,
+  Inject,
+  NotFoundException,
+  Param,
+} from '@nestjs/common';
 import { ClientGrpc } from '@nestjs/microservices';
-import { from, Observable } from 'rxjs';
+import { from, map, mergeMap, Observable } from 'rxjs';
 import { AddCardDto } from './card/dto/add.card.dto';
 import { ICard, ICardService } from './card/interface/card.interface';
 import { IResponse } from './common/interface/responser.interface';
 import { Responser } from './common/utils/responser';
 import { getUserAgent } from './common/utils/user.agent.parser.utils';
+import { IViewCardService } from './view-card/interface/view-card.interface';
 @Controller()
 export class AppController {
   private cardService: ICardService;
+  private viewCardService: IViewCardService;
 
   constructor(
     @Inject('CARD_PACKAGE')
     private readonly cardClient: ClientGrpc,
+    @Inject('VIEW_CARD_PACKAGE')
+    private readonly viewCardClient: ClientGrpc,
   ) {}
 
   onModuleInit() {
     this.cardService = this.cardClient.getService<ICardService>('CardService');
+    this.viewCardService =
+      this.viewCardClient.getService<IViewCardService>('ViewCardService');
   }
 
   @Get('un/:userName')
@@ -25,10 +38,31 @@ export class AppController {
     @Param() { userName }: Pick<AddCardDto, 'userName'>,
   ): Observable<IResponse<ICard>> {
     const userAgentParse = getUserAgent(userAgent);
-
-    return from(
+    const getCardInfo = from(
       this.cardService.getPublicCard({
         userName,
+      }),
+    );
+    return getCardInfo.pipe(
+      mergeMap((cardInfoResult) => {
+        if (!cardInfoResult.success)
+          throw new NotFoundException('card not found ...');
+        return from(
+          this.viewCardService.addViewCard({
+            cardId: cardInfoResult.data._id,
+            ...userAgentParse,
+          }),
+        ).pipe(
+          map((addViewResult) => {
+            return {
+              cardInfoResult,
+              addViewResult,
+            };
+          }),
+        );
+      }),
+      map(({ cardInfoResult, addViewResult }) => {
+        return cardInfoResult;
       }),
     );
   }
