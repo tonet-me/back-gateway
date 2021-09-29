@@ -1,11 +1,11 @@
-import { Controller, Get, Inject, Param } from '@nestjs/common';
+import { Controller, Get, Headers, Inject, Param } from '@nestjs/common';
 import { ClientGrpc } from '@nestjs/microservices';
 import { from, Observable } from 'rxjs';
 import { AddCardDto } from './card/dto/add.card.dto';
 import { ICard, ICardService } from './card/interface/card.interface';
 import { IResponse } from './common/interface/responser.interface';
 import { Responser } from './common/utils/responser';
-
+import { getUserAgent } from './common/utils/user.agent.parser.utils';
 @Controller()
 export class AppController {
   private cardService: ICardService;
@@ -21,8 +21,11 @@ export class AppController {
 
   @Get('un/:userName')
   public getPublicCard(
+    @Headers('user-agent') userAgent: any,
     @Param() { userName }: Pick<AddCardDto, 'userName'>,
   ): Observable<IResponse<ICard>> {
+    const userAgentParse = getUserAgent(userAgent);
+
     return from(
       this.cardService.getPublicCard({
         userName,
