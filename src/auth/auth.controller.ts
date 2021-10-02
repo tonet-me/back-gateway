@@ -1,4 +1,5 @@
 import { Body, Controller, Inject, Post, UseGuards } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { ClientGrpc } from '@nestjs/microservices';
 import {
   InjectThrottlerOptions,
@@ -21,15 +22,19 @@ import {
 @Controller('auth')
 export class AuthController {
   private authService: IAuthService;
-
+  otpRequestTTL: number;
+  otpLimitRequest: number;
   constructor(
     @Inject('AUTH_OTP_PACKAGE') private client: ClientGrpc,
     @InjectThrottlerStorage()
     private throttlerStorageService: ThrottlerStorageService,
+    private readonly configService: ConfigService,
   ) {}
 
   onModuleInit() {
     this.authService = this.client.getService<IAuthService>('AuthService');
+    this.otpRequestTTL = this.configService.get('THROTTLE_TTL_OTP');
+    this.otpLimitRequest = this.configService.get('THROTTLE_LIMIT_OTP');
   }
 
   @Post('/otp-make')
@@ -51,7 +56,7 @@ export class AuthController {
     return loginRequestOTP.pipe(
       mergeMap((loginResult) => {
         if (!loginResult.success)
-          this.addCountLimitedOtp(loginOtpBody.phoneNumber, 60);
+          this.addCountLimitedOtp(loginOtpBody.phoneNumber, this.otpRequestTTL);
 
         return from(this.getCountLimitedOtp(loginOtpBody.phoneNumber)).pipe(
           map((tryCount) => {
@@ -85,6 +90,6 @@ export class AuthController {
     const tryReq = await this.throttlerStorageService.getRecord(
       `countOtpRequest:${phoneNumber}`,
     );
-    return 3 - tryReq.length;
+    return this.otpLimitRequest - tryReq.length;
   }
 }
