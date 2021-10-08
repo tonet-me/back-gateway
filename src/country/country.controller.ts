@@ -11,11 +11,11 @@ import { ICountry, ICountryService } from './interface/country.interface';
 export class CountryController {
   private countryService: ICountryService;
 
-  constructor(@Inject('COUNTRY_PACKAGE') private countryClient: ClientGrpc) {}
+  constructor(@Inject('STATE_PACKAGE') private countryClient: ClientGrpc) {}
 
   onModuleInit() {
     this.countryService =
-      this.countryClient.getService<ICountryService>('CountryService');
+      this.countryClient.getService<ICountryService>('StateService');
   }
 
   @Get('/')

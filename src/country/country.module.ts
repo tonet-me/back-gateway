@@ -7,11 +7,11 @@ import { join } from 'path';
   imports: [
     ClientsModule.register([
       {
-        name: 'COUNTRY_PACKAGE',
+        name: 'STATE_PACKAGE',
         transport: Transport.GRPC,
         options: {
-          package: ['tonet.country'],
-          protoPath: join(__dirname, '../../proto/country.proto'),
+          package: ['tonet.state'],
+          protoPath: join(__dirname, '../../proto/state.proto'),
           url: 'localhost:50052',
         },
       },

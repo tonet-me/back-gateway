@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package  tonet.country;
+package  tonet.state;
 
 message Country {
   string _id = 1;
@@ -53,7 +53,7 @@ message CountriesResponse {
     
 }
 
-service CountryService {
+service StateService {
   rpc GetCountry (GetCountryRequest) returns (CountryResponse);
   rpc GetCountries (GetCountriesRequest) returns (CountriesResponse);
 }
