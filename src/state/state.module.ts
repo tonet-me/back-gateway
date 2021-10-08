@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { CountryController } from './country.controller';
+import { StateController } from './state.controller';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { join } from 'path';
 
@@ -17,6 +17,6 @@ import { join } from 'path';
       },
     ]),
   ],
-  controllers: [CountryController],
+  controllers: [StateController],
 })
-export class CountryModule {}
+export class StateModule {}

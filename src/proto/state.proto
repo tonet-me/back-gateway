@@ -12,11 +12,31 @@ message Country {
     string message = 6 ;
 }
 
+message City {
+  string _id = 1;
+  string name = 2;
+    //ERROR
+    int32 errorCode = 3 ;
+    string timestamp = 4 ;
+    string path = 5 ;
+    string message = 6 ;
+}
+
+
 message CountryFilters{
     string name = 1;
 }
 
+message CityFilters{
+  string name = 1;
+}
+
+
 message GetCountryRequest {
+  string _id = 1;
+}
+
+message GetCityRequest {
   string _id = 1;
 }
 
@@ -25,11 +45,18 @@ message PaginationOptions {
   int32 limit = 2;
 }
 
+
+  
+
 message GetCountriesRequest {
   PaginationOptions paginationOptions = 1;
   CountryFilters filters =2;
 }
   
+message GetCitiesRequest {
+  PaginationOptions paginationOptions = 1;
+  CityFilters filters =2;
+}
 
 message CountryResponse {
   bool success = 1;
@@ -39,11 +66,27 @@ message CountryResponse {
   
 }
 
+message CityResponse {
+  bool success = 1;
+  string message = 2;
+  City data = 3;
+  int32 status = 4;
+  
+}
+
+
 message CountryPaginate{
   repeated Country docs = 1;
   string errorCode = 2;
   string message = 3;
 }
+
+message CityPaginate{
+  repeated City docs = 1;
+  string errorCode = 2;
+  string message = 3;
+}
+
 
 message CountriesResponse {
     bool success = 1;
@@ -53,7 +96,17 @@ message CountriesResponse {
     
 }
 
+message CitiesResponse {
+  bool success = 1;
+  string message = 2;
+  CityPaginate data = 3;
+  int32 status = 4;
+  
+}
 service StateService {
   rpc GetCountry (GetCountryRequest) returns (CountryResponse);
   rpc GetCountries (GetCountriesRequest) returns (CountriesResponse);
+  rpc GetCity (GetCityRequest) returns (CityResponse);
+  rpc GetCities (GetCitiesRequest) returns (CitiesResponse);
+
 }

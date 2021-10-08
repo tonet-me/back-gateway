@@ -6,7 +6,7 @@ import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { CardModule } from './card/card.module';
 import { AppController } from './app.controller';
-import { CountryModule } from './country/country.module';
+import { StateModule } from './state/state.module';
 import { ViewCardModule } from './view-card/view-card.module';
 
 @Module({
@@ -20,7 +20,7 @@ import { ViewCardModule } from './view-card/view-card.module';
     AuthModule,
     UserModule,
     CardModule,
-    CountryModule,
+    StateModule,
     ViewCardModule,
   ],
   controllers: [AppController],
