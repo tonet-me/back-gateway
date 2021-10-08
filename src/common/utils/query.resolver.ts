@@ -41,9 +41,9 @@ export class QueryResolver {
     }
   }
   private filterInit(filters: any) {
-    filters?.name != undefined
-      ? (filters.name = new RegExp(`.*${filters.name}.*`))
-      : undefined;
+    // filters?.name != undefined
+    //   ? (filters.name = new RegExp(`.*${filters.name}.*`))
+    //   : undefined;
     this.filters = filters;
   }
 }
