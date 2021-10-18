@@ -29,6 +29,7 @@ message CountryFilters{
 
 message CityFilters{
   string name = 1;
+  string countryId=2 ;
 }
 
 
