@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Get,
   Inject,
   Post,
   Put,
@@ -42,6 +43,18 @@ export class UserController {
     return from(
       this.userService.completeProfile({
         ...userCompleteProfile,
+        _id: req.user._id,
+      }),
+    );
+  }
+
+  @Get('/profile')
+  @UseGuards(UserStatusGuard)
+  @UserStatus(UserStatusEnum.COMPLETED)
+  @UseGuards(AuthGuard)
+  getProfile(@Req() req: IReq): Observable<IResponse<IUser>> {
+    return from(
+      this.userService.getProfile({
         _id: req.user._id,
       }),
     );

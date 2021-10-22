@@ -28,6 +28,11 @@ message UserUpdateLimitRequest {
   string _id = 4;
 }
 
+message GetProfileRequest {
+  string _id = 4;
+}
+
+
 message UserResponse {
   bool success = 1;
   string message = 2;
@@ -45,6 +50,7 @@ message CompleteProfileRequest{
 
 
 service UserService {
+  rpc GetProfile (GetProfileRequest) returns (UserResponse);
   rpc UpdateProfile (UserUpdateLimitRequest) returns (UserResponse);
   rpc CompleteProfile (CompleteProfileRequest) returns (UserResponse);
 }
