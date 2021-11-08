@@ -33,14 +33,49 @@ export class AppController {
   }
 
   @Get('un/:userName')
-  public getPublicCard(
+  public getPublicCardByUsername(
     @Headers('user-agent') userAgent: any,
     @Param() { userName }: Pick<AddCardDto, 'userName'>,
   ): Observable<IResponse<ICard>> {
     const userAgentParse = getUserAgent(userAgent);
     const getCardInfo = from(
-      this.cardService.getPublicCard({
+      this.cardService.getPublicCardByUsername({
         userName,
+      }),
+    );
+    return getCardInfo.pipe(
+      mergeMap((cardInfoResult) => {
+        if (!cardInfoResult.success)
+          throw new NotFoundException('card not found ...');
+        return from(
+          this.viewCardService.addViewCard({
+            cardId: cardInfoResult.data._id,
+            ...userAgentParse,
+          }),
+        ).pipe(
+          map((addViewResult) => {
+            return {
+              cardInfoResult,
+              addViewResult,
+            };
+          }),
+        );
+      }),
+      map(({ cardInfoResult, addViewResult }) => {
+        return cardInfoResult;
+      }),
+    );
+  }
+
+  @Get('qr/:qrcode')
+  public getPublicCardByQrcode(
+    @Headers('user-agent') userAgent: any,
+    @Param() { qrcode }: Pick<AddCardDto, 'qrcode'>,
+  ): Observable<IResponse<ICard>> {
+    const userAgentParse = getUserAgent(userAgent);
+    const getCardInfo = from(
+      this.cardService.getPublicCardByQrcode({
+        qrcode,
       }),
     );
     return getCardInfo.pipe(
