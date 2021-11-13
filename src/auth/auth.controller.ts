@@ -12,6 +12,7 @@ import { from, map, mergeMap, Observable, of } from 'rxjs';
 import { IResponse } from 'src/common/interface/responser.interface';
 import { Responser } from 'src/common/utils/responser';
 import { LoginOtpDTO, MakeOtpDTO } from './dto/auth.otp.dto';
+import { GetRefreshTokenOtpDTO } from './dto/get-refresh-token.dto';
 import { ThrottlerOTPGuard } from './guard/otp.throttler.guard';
 import {
   IAuthService,
@@ -44,6 +45,17 @@ export class AuthController {
     @Body() makeOtpBody: MakeOtpDTO,
   ): Observable<IResponse<IMakeOtpResult>> {
     return from(this.authService.makeOtp(makeOtpBody));
+  }
+
+  @Post('/refresh-token')
+  getRefreshToen(
+    @Body() getRefreshToken: GetRefreshTokenOtpDTO,
+  ): Observable<IResponse<ILoginOtpResult>> {
+    return from(
+      this.authService.getRefreshToken({
+        refreshToken: getRefreshToken.refreshToken,
+      }),
+    );
   }
 
   @UseGuards(ThrottlerOTPGuard)
