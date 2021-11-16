@@ -2,7 +2,6 @@ import { Body, Controller, Inject, Post, UseGuards } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { ClientGrpc } from '@nestjs/microservices';
 import {
-  InjectThrottlerOptions,
   InjectThrottlerStorage,
   Throttle,
   ThrottlerGuard,
@@ -39,7 +38,7 @@ export class AuthController {
   }
 
   @Post('/otp-make')
-  @Throttle(2, 60)
+  @Throttle(3, 120)
   @UseGuards(ThrottlerGuard)
   makeOtp(
     @Body() makeOtpBody: MakeOtpDTO,
