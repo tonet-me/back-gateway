@@ -77,28 +77,21 @@ message AddCardRequest {
 message UpdateCardRequest {
   string _id = 1;
   string userId = 2;
-  string title = 3;
-  string about = 4;
-  string photo = 5;
-  string website = 6;
-  string qrcode = 7;
-  repeated Phone phones = 8;
-  repeated Social socials = 9;
-  repeated Mail mails = 10;
-  repeated Address addresses = 11;
-  string isActive = 12;
-  string verified = 13;
+  string userName = 3;
+  string name = 4;
+  string title = 5;
+  string about = 6;
+  string photo = 7;
+  string website = 8;
+  string qrcode = 9;
+  repeated Phone phones = 10;
+  repeated Social socials = 11;
+  repeated Mail mails = 12;
+  repeated Address addresses = 13;
+  string isActive = 14;
+  string verified = 15;
 }
 
-message UpdateBasicInfoCardRequest {
-  string _id = 1;
-  string userId = 2;
-  string name = 3;
-  string title = 4;
-  string about = 5;
-  string photo = 6;
-  string userName = 7;
-}
 
 message DeleteCard{
     string _id = 1;
@@ -140,7 +133,6 @@ message CardsResponse {
 service CardService {
   rpc AddCard (AddCardRequest) returns (CardResponse);
   rpc UpdateCard (UpdateCardRequest) returns (CardResponse);
-  rpc UpdateBasicInfoCard (UpdateBasicInfoCardRequest) returns (CardResponse);
   rpc GetOwnCard (GetOwnCard) returns (CardResponse);
   rpc GetOwnCards (GetOwnCards) returns (CardsResponse);
   rpc GetPublicCardByUsername (GetPublicCardByUsername) returns (CardResponse);

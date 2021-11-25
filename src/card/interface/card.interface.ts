@@ -5,7 +5,6 @@ import { SocialTitleEnum } from '../enum/socail.title.dto';
 export interface ICardService {
   addCard(data: Partial<ICard>): Observable<IResponse<ICard>>;
   updateCard(data: Partial<ICard>): Observable<IResponse<ICard>>;
-  updateBasicInfoCard(data: Partial<ICard>): Observable<IResponse<ICard>>;
   getOwnCard(data: Partial<ICard>): Observable<IResponse<ICard>>;
   getOwnCards(data: Partial<ICard>): Observable<IResponse<ICard[]>>;
   getPublicCardByUsername(data: Partial<ICard>): Observable<IResponse<ICard>>;
