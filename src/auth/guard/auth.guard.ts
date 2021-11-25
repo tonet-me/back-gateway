@@ -2,6 +2,7 @@ import {
   BadRequestException,
   CanActivate,
   ExecutionContext,
+  ForbiddenException,
   Inject,
   Injectable,
 } from '@nestjs/common';
@@ -33,7 +34,7 @@ export class AuthGuard implements CanActivate {
         if (data && data.success && data.data._id) {
           request.user = data.data;
           return true;
-        } else return false;
+        } else throw new ForbiddenException(data);
       }),
     );
   }

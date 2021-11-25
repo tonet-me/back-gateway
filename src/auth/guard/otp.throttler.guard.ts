@@ -18,7 +18,10 @@ export class ThrottlerOTPGuard extends ThrottlerGuard {
     const countRequest = await this.storageService.getRecord(
       `countOtpRequest:${phoneNumber}`,
     );
-    if (countRequest.length > limit - 1) throw new ThrottlerException();
+
+    if (countRequest.length > limit - 1) {
+      throw new ThrottlerException();
+    }
     return true;
   }
 }

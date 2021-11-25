@@ -49,8 +49,8 @@ export class UserController {
   }
 
   @Get('/profile')
-  @UseGuards(UserStatusGuard)
-  @UserStatus(UserStatusEnum.COMPLETED)
+  // @UseGuards(UserStatusGuard)
+  // @UserStatus(UserStatusEnum.COMPLETED)
   @UseGuards(AuthGuard)
   getProfile(@Req() req: IReq): Observable<IResponse<IUser>> {
     return from(

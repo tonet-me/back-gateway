@@ -2,7 +2,6 @@ import { Body, Controller, Inject, Post, UseGuards } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { ClientGrpc } from '@nestjs/microservices';
 import {
-  InjectThrottlerOptions,
   InjectThrottlerStorage,
   Throttle,
   ThrottlerGuard,
@@ -12,6 +11,7 @@ import { from, map, mergeMap, Observable, of } from 'rxjs';
 import { IResponse } from 'src/common/interface/responser.interface';
 import { Responser } from 'src/common/utils/responser';
 import { LoginOtpDTO, MakeOtpDTO } from './dto/auth.otp.dto';
+import { GetRefreshTokenOtpDTO } from './dto/get-refresh-token.dto';
 import { ThrottlerOTPGuard } from './guard/otp.throttler.guard';
 import {
   IAuthService,
@@ -38,12 +38,23 @@ export class AuthController {
   }
 
   @Post('/otp-make')
-  @Throttle(2, 60)
+  @Throttle(3, 120)
   @UseGuards(ThrottlerGuard)
   makeOtp(
     @Body() makeOtpBody: MakeOtpDTO,
   ): Observable<IResponse<IMakeOtpResult>> {
     return from(this.authService.makeOtp(makeOtpBody));
+  }
+
+  @Post('/refresh-token')
+  getRefreshToen(
+    @Body() getRefreshToken: GetRefreshTokenOtpDTO,
+  ): Observable<IResponse<ILoginOtpResult>> {
+    return from(
+      this.authService.getRefreshToken({
+        refreshToken: getRefreshToken.refreshToken,
+      }),
+    );
   }
 
   @UseGuards(ThrottlerOTPGuard)

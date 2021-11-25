@@ -8,7 +8,8 @@ export interface ICardService {
   updateBasicInfoCard(data: Partial<ICard>): Observable<IResponse<ICard>>;
   getOwnCard(data: Partial<ICard>): Observable<IResponse<ICard>>;
   getOwnCards(data: Partial<ICard>): Observable<IResponse<ICard[]>>;
-  getPublicCard(data: Partial<ICard>): Observable<IResponse<ICard>>;
+  getPublicCardByUsername(data: Partial<ICard>): Observable<IResponse<ICard>>;
+  getPublicCardByQrcode(data: Partial<ICard>): Observable<IResponse<ICard>>;
   deleteOwnCard(data: Partial<ICard>): Observable<IResponse<ICard>>;
 }
 
