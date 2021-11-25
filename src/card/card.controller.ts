@@ -80,23 +80,23 @@ export class CardController {
     );
   }
 
-  @Put('/basic-info/:cardId')
-  @UseGuards(UserStatusGuard)
-  @UserStatus(UserStatusEnum.COMPLETED)
-  @UseGuards(AuthGuard)
-  updateBasicInfoCard(
-    @Req() req: IReq,
-    @Param() { cardId }: CardIdDTO,
-    @Body() updateBasicInfoCardBody: UpdateBasicInfoCardDto,
-  ): Observable<IResponse<ICard>> {
-    return from(
-      this.cardService.updateBasicInfoCard({
-        ...updateBasicInfoCardBody,
-        _id: cardId,
-        userId: req.user._id,
-      }),
-    );
-  }
+  // @Put('/basic-info/:cardId')
+  // @UseGuards(UserStatusGuard)
+  // @UserStatus(UserStatusEnum.COMPLETED)
+  // @UseGuards(AuthGuard)
+  // updateBasicInfoCard(
+  //   @Req() req: IReq,
+  //   @Param() { cardId }: CardIdDTO,
+  //   @Body() updateBasicInfoCardBody: UpdateBasicInfoCardDto,
+  // ): Observable<IResponse<ICard>> {
+  //   return from(
+  //     this.cardService.updateBasicInfoCard({
+  //       ...updateBasicInfoCardBody,
+  //       _id: cardId,
+  //       userId: req.user._id,
+  //     }),
+  //   );
+  // }
 
   @Put('/:cardId')
   @UseGuards(UserStatusGuard)
