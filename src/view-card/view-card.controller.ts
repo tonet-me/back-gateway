@@ -42,16 +42,6 @@ export class ViewCardController {
     this.cardService = this.client.getService<ICardService>('CardService');
   }
 
-  //not use in production
-  // @Post('/')
-  // addViewCrad(
-  //   @Body() addViewCardData: AddViewCardDto,
-  // ): Observable<IResponse<IViewCard>> {
-  //   console.log(addViewCardData);
-
-  //   return from(this.viewCardService.addViewCard(addViewCardData));
-  // }
-
   @Get('/:cardId')
   @UseGuards(UserStatusGuard)
   @UserStatus(UserStatusEnum.COMPLETED)
