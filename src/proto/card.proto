@@ -48,8 +48,8 @@ message Card {
   repeated Social socials = 11;
   repeated Mail mails = 12;
   repeated Address addresses = 13;
-  string isActive = 14;
-  string verified = 15;
+  bool isActive = 14;
+  bool verified = 15;
     //ERROR
     int32 errorCode = 16 ;
     string timestamp = 17 ;
