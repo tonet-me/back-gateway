@@ -9,6 +9,7 @@ import {
 import { ClientGrpc } from '@nestjs/microservices';
 import { from, map, mergeMap, Observable } from 'rxjs';
 import { AddCardDto } from './card/dto/add.card.dto';
+import { CardIdDTO } from './card/dto/card.id.dto';
 import { ICard, ICardService } from './card/interface/card.interface';
 import { IResponse } from './common/interface/responser.interface';
 import { Responser } from './common/utils/responser';
@@ -67,15 +68,15 @@ export class AppController {
     );
   }
 
-  @Get('qr/:qrcode')
+  @Get('qr/:cardId')
   public getPublicCardByQrcode(
     @Headers('user-agent') userAgent: any,
-    @Param() { qrcode }: Pick<AddCardDto, 'qrcode'>,
+    @Param() { cardId }: CardIdDTO,
   ): Observable<IResponse<ICard>> {
     const userAgentParse = getUserAgent(userAgent);
     const getCardInfo = from(
       this.cardService.getPublicCardByQrcode({
-        qrcode,
+        _id: cardId,
       }),
     );
     return getCardInfo.pipe(

@@ -11,7 +11,7 @@ export interface ICardService {
     data: Partial<ICard & IPaginateOption>,
   ): Observable<IResponse<ICard[]>>;
   getPublicCardByUsername(data: Partial<ICard>): Observable<IResponse<ICard>>;
-  getPublicCardByQrcode(data: Partial<ICard>): Observable<IResponse<ICard>>;
+  getPublicCardByQrcode(data: Pick<ICard, '_id'>): Observable<IResponse<ICard>>;
   deleteOwnCard(data: Partial<ICard>): Observable<IResponse<ICard>>;
 }
 
