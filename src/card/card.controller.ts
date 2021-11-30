@@ -9,6 +9,7 @@ import {
   Req,
   Put,
   Get,
+  Query,
 } from '@nestjs/common';
 import { AddCardDto } from './dto/add.card.dto';
 import { UpdateCardDto } from './dto/update.card.dto';
@@ -23,6 +24,8 @@ import { UserStatus } from 'src/auth/decorator/user.status';
 import { UserStatusEnum } from 'src/user/dto/update.profile.dto';
 import { UserStatusGuard } from 'src/auth/guard/userStatus.guard';
 import { UpdateBasicInfoCardDto } from './dto/update.base.card.dto';
+import { QueryResolver } from 'src/common/utils/query.resolver';
+import { CardQueryResolversDTO } from './dto/card.pagination.dto';
 
 @Controller('card')
 export class CardController {
@@ -56,10 +59,16 @@ export class CardController {
   @UseGuards(UserStatusGuard)
   @UserStatus(UserStatusEnum.COMPLETED)
   @UseGuards(AuthGuard)
-  getOwnCards(@Req() req: IReq): Observable<IResponse<ICard[]>> {
+  getOwnCards(
+    @Req() req: IReq,
+    @Query() query: CardQueryResolversDTO,
+  ): Observable<IResponse<ICard[]>> {
+    const queryResolver: QueryResolver = new QueryResolver(query);
+
     return from(
       this.cardService.getOwnCards({
         userId: req.user._id,
+        ...queryResolver.query,
       }),
     );
   }

@@ -23,7 +23,7 @@ export class StateController {
   @Get('/countries')
   getCountries(
     @Query() query: CountryQueryResolversDTO,
-  ): Observable<IResponse<ICountry>> {
+  ): Observable<IResponse<ICountry[]>> {
     const queryResolver: QueryResolver = new QueryResolver(query);
     return from(this.stateService.getCountries(queryResolver.query));
   }
@@ -36,7 +36,7 @@ export class StateController {
   @Get('/cities')
   getCities(
     @Query() query: CityQueryResolversDTO,
-  ): Observable<IResponse<ICity>> {
+  ): Observable<IResponse<ICity[]>> {
     const queryResolver: QueryResolver = new QueryResolver(query);
     return from(this.stateService.getCities(queryResolver.query));
   }

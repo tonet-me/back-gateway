@@ -80,12 +80,24 @@ message CountryPaginate{
   repeated Country docs = 1;
   string errorCode = 2;
   string message = 3;
+  int32 totalDocs = 4;
+  int32 totalPages = 5;
+  int32 limit = 6;
+  int32 page = 7;
+  int32 hasPrevPage = 8;
+  int32 hasNextPage = 9;
 }
 
 message CityPaginate{
   repeated City docs = 1;
   string errorCode = 2;
   string message = 3;
+  int32 totalDocs = 4;
+  int32 totalPages = 5;
+  int32 limit = 6;
+  int32 page = 7;
+  int32 hasPrevPage = 8;
+  int32 hasNextPage = 9;
 }
 
 
@@ -102,6 +114,7 @@ message CitiesResponse {
   string message = 2;
   CityPaginate data = 3;
   int32 status = 4;
+  
   
 }
 service StateService {

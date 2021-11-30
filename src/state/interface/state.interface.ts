@@ -4,9 +4,11 @@ import { IResponse } from 'src/common/interface/responser.interface';
 
 export interface IStateService {
   getCountry(data: Partial<ICountry>): Observable<IResponse<ICountry>>;
-  getCountries(data: Partial<IPaginateOption>): Observable<IResponse<ICountry>>;
+  getCountries(
+    data: Partial<IPaginateOption>,
+  ): Observable<IResponse<ICountry[]>>;
   getCity(data: Partial<ICity>): Observable<IResponse<ICity>>;
-  getCities(data: Partial<IPaginateOption>): Observable<IResponse<ICity>>;
+  getCities(data: Partial<IPaginateOption>): Observable<IResponse<ICity[]>>;
 }
 
 export interface ICountry {

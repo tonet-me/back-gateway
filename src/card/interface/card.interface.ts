@@ -1,4 +1,5 @@
 import { Observable } from 'rxjs';
+import { IPaginateOption } from 'src/common/interface/paginationOption.interface';
 import { IResponse } from 'src/common/interface/responser.interface';
 import { SocialTitleEnum } from '../enum/socail.title.dto';
 
@@ -6,7 +7,9 @@ export interface ICardService {
   addCard(data: Partial<ICard>): Observable<IResponse<ICard>>;
   updateCard(data: Partial<ICard>): Observable<IResponse<ICard>>;
   getOwnCard(data: Partial<ICard>): Observable<IResponse<ICard>>;
-  getOwnCards(data: Partial<ICard>): Observable<IResponse<ICard[]>>;
+  getOwnCards(
+    data: Partial<ICard & IPaginateOption>,
+  ): Observable<IResponse<ICard[]>>;
   getPublicCardByUsername(data: Partial<ICard>): Observable<IResponse<ICard>>;
   getPublicCardByQrcode(data: Partial<ICard>): Observable<IResponse<ICard>>;
   deleteOwnCard(data: Partial<ICard>): Observable<IResponse<ICard>>;

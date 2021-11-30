@@ -110,9 +110,25 @@ message GetPublicCardByQrcode{
   string userName = 1;
 }
 
-message GetOwnCards{
-    string userId = 1;
+message CardFilters{
+  string name = 1;
+  bool isActive = 2;
+
 }
+
+
+message PaginationOptions {
+  int32 page = 1;
+  int32 limit = 2;
+}
+
+message GetCardsRequest {
+  string userId = 1;
+  PaginationOptions paginationOptions = 2;
+  CardFilters filters =3;
+}
+
+
 
 message CardResponse {
   bool success = 1;
@@ -122,10 +138,22 @@ message CardResponse {
   
 }
 
+message CardPaginate{
+  repeated Card docs = 1;
+  string errorCode = 2;
+  string message = 3;
+  int32 totalDocs = 4;
+  int32 totalPages = 5;
+  int32 limit = 6;
+  int32 page = 7;
+  int32 hasPrevPage = 8;
+  int32 hasNextPage = 9;
+}
+
 message CardsResponse {
   bool success = 1;
   string message = 2;
-  repeated Card data = 3;
+  CardPaginate data = 3;
   int32 status = 4;
 
 }
@@ -134,7 +162,7 @@ service CardService {
   rpc AddCard (AddCardRequest) returns (CardResponse);
   rpc UpdateCard (UpdateCardRequest) returns (CardResponse);
   rpc GetOwnCard (GetOwnCard) returns (CardResponse);
-  rpc GetOwnCards (GetOwnCards) returns (CardsResponse);
+  rpc GetOwnCards (GetCardsRequest) returns (CardsResponse);
   rpc GetPublicCardByUsername (GetPublicCardByUsername) returns (CardResponse);
   rpc getPublicCardByQrcode (GetPublicCardByQrcode) returns (CardResponse);
   rpc DeleteOwnCard (GetOwnCard) returns (CardResponse);
