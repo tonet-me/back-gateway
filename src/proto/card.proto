@@ -107,7 +107,7 @@ message GetPublicCardByUsername{
 }
 
 message GetPublicCardByQrcode{
-  string userName = 1;
+  string _id = 1;
 }
 
 message CardFilters{
