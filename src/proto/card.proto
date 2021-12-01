@@ -107,7 +107,7 @@ message GetPublicCardByUsername{
 }
 
 message GetPublicCardByQrcode{
-  string userName = 1;
+  string _id = 1;
 }
 
 message CardFilters{
@@ -164,6 +164,6 @@ service CardService {
   rpc GetOwnCard (GetOwnCard) returns (CardResponse);
   rpc GetOwnCards (GetCardsRequest) returns (CardsResponse);
   rpc GetPublicCardByUsername (GetPublicCardByUsername) returns (CardResponse);
-  rpc getPublicCardByQrcode (GetPublicCardByQrcode) returns (CardResponse);
+  rpc GetPublicCardByQrcode (GetPublicCardByQrcode) returns (CardResponse);
   rpc DeleteOwnCard (GetOwnCard) returns (CardResponse);
 }
