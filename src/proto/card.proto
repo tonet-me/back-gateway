@@ -68,11 +68,13 @@ message Card {
   repeated Address addresses = 13;
   bool isActive = 14;
   bool verified = 15;
+  string createdAt = 16;
+  string updatedAt = 17;
     //ERROR
-    int32 errorCode = 16 ;
-    string timestamp = 17 ;
-    string path = 18 ;
-    string message = 19 ;
+    int32 errorCode = 18 ;
+    string timestamp = 19 ;
+    string path = 20 ;
+    string message = 21 ;
 }
 
 message AddCardRequest {
