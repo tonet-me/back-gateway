@@ -20,4 +20,5 @@ export enum SocialTitleEnum {
   APPLEMUSIC = 'applemusic',
   GOOGLEPLAY = 'googleplay',
   STEAM = 'steam',
+  DRIBBBLE = 'dribbble',
 }
