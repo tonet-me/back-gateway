@@ -3,7 +3,6 @@ import {
   ArrayMaxSize,
   ArrayMinSize,
   IsArray,
-  isArray,
   IsDefined,
   IsEmail,
   IsEnum,
@@ -16,6 +15,8 @@ import {
   Matches,
   ValidateNested,
 } from 'class-validator';
+import { SensitiveUsername } from 'src/common/decorator/sensitive.username.decorator';
+import { ToLowerCase } from 'src/common/decorator/toLowerCase.decorator';
 import { SocialTitleEnum } from '../enum/socail.title.dto';
 
 class PhoneDTO {
@@ -146,6 +147,8 @@ export class AddCardDto {
   @Matches(/^(?=[a-zA-Z0-9_]{5,30}$)(?!.*[.]{2})[^.].*[^.]$/, {
     message: 'username must be _ Alphabets Numbers',
   })
+  @SensitiveUsername('userName')
+  @ToLowerCase('userName')
   readonly userName: string;
 
   @IsOptional()
