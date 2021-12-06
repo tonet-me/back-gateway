@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package  user.card;
 
+import "google/protobuf/any.proto";
 
 message Phone{
   string title = 1;
@@ -19,18 +20,35 @@ message Mail{
   string content = 1;
   int32 order = 2;
 }
+
 message Location{
   repeated int32 coordinates = 1;
   string type =2;
 }
 
+message City{
+  string _id = 1;
+  string name =2;
+}
+
+message Country{
+  string _id = 1;
+  string name =2;
+}
+
 message Address{
   string title = 1;
-  string country = 2;
-  string city = 3;
-  string address = 4;
-  Location location = 5;
-  int32 order = 6;
+  oneof country_one_of {
+    string countryId = 2;
+    Country country = 3;
+  }
+  oneof city_one_of {
+    string cityId = 4;
+    City city = 5;
+  }
+  string address = 6;
+  Location location = 7;
+  int32 order = 8;
 }
 
 
@@ -50,11 +68,13 @@ message Card {
   repeated Address addresses = 13;
   bool isActive = 14;
   bool verified = 15;
+  string createdAt = 16;
+  string updatedAt = 17;
     //ERROR
-    int32 errorCode = 16 ;
-    string timestamp = 17 ;
-    string path = 18 ;
-    string message = 19 ;
+    int32 errorCode = 18 ;
+    string timestamp = 19 ;
+    string path = 20 ;
+    string message = 21 ;
 }
 
 message AddCardRequest {

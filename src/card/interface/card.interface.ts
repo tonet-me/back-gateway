@@ -38,8 +38,8 @@ interface Location {
 }
 interface Address {
   readonly title: string;
-  readonly country: string;
-  readonly city: string;
+  readonly countryId: string;
+  readonly cityId: string;
   readonly address: string;
   readonly location: Location;
   readonly order: number;

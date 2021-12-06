@@ -87,12 +87,12 @@ class AddressDTO {
   @IsDefined()
   @IsNotEmpty()
   @IsMongoId()
-  readonly country: string;
+  readonly countryId: string;
 
   @IsDefined()
   @IsNotEmpty()
   @IsMongoId()
-  readonly city: string;
+  readonly cityId: string;
 
   @IsOptional()
   @IsNotEmpty()

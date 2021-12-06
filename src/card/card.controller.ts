@@ -23,7 +23,6 @@ import { CardIdDTO } from './dto/card.id.dto';
 import { UserStatus } from 'src/auth/decorator/user.status';
 import { UserStatusEnum } from 'src/user/dto/update.profile.dto';
 import { UserStatusGuard } from 'src/auth/guard/userStatus.guard';
-import { UpdateBasicInfoCardDto } from './dto/update.base.card.dto';
 import { QueryResolver } from 'src/common/utils/query.resolver';
 import { CardQueryResolversDTO } from './dto/card.pagination.dto';
 
