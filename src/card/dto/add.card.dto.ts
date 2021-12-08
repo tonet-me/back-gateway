@@ -17,7 +17,8 @@ import {
 } from 'class-validator';
 import { SensitiveUsername } from 'src/common/decorator/sensitive.username.decorator';
 import { ToLowerCase } from 'src/common/decorator/toLowerCase.decorator';
-import { SocialTitleEnum } from '../enum/socail.title.dto';
+import { CardLanguageEnum } from '../enum/card.language.dto';
+import { CardSocialTitleEnum } from '../enum/card.socail.title.dto';
 
 class PhoneDTO {
   @IsDefined()
@@ -39,8 +40,8 @@ class PhoneDTO {
 class SocialDTO {
   @IsDefined()
   @IsNotEmpty()
-  @IsEnum(SocialTitleEnum)
-  readonly title: SocialTitleEnum;
+  @IsEnum(CardSocialTitleEnum)
+  readonly title: CardSocialTitleEnum;
 
   @IsDefined()
   @IsNotEmpty()
@@ -182,4 +183,9 @@ export class AddCardDto {
   @IsOptional()
   @IsNotEmpty()
   readonly isActive: boolean = true;
+
+  @IsDefined()
+  @IsNotEmpty()
+  @IsEnum(CardLanguageEnum)
+  readonly language: CardLanguageEnum;
 }

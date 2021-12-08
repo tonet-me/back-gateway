@@ -1,4 +1,4 @@
-export enum SocialTitleEnum {
+export enum CardSocialTitleEnum {
   TELEGRAM = 'telegram',
   INSTAGRAM = 'instagram',
   FACEBOOK = 'facebook',

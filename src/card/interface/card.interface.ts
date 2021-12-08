@@ -1,7 +1,8 @@
 import { Observable } from 'rxjs';
 import { IPaginateOption } from 'src/common/interface/paginationOption.interface';
 import { IResponse } from 'src/common/interface/responser.interface';
-import { SocialTitleEnum } from '../enum/socail.title.dto';
+import { CardLanguageEnum } from '../enum/card.language.dto';
+import { CardSocialTitleEnum } from '../enum/card.socail.title.dto';
 
 export interface ICardService {
   addCard(data: Partial<ICard>): Observable<IResponse<ICard>>;
@@ -22,7 +23,7 @@ interface Phone {
 }
 
 interface Social {
-  readonly title: SocialTitleEnum;
+  readonly title: CardSocialTitleEnum;
   readonly content: string;
   readonly order: number;
 }
@@ -61,4 +62,5 @@ export interface ICard {
   readonly addresses: Address[];
   readonly verified: boolean;
   readonly isActive: boolean;
+  readonly language: CardLanguageEnum;
 }
