@@ -21,11 +21,10 @@ export class GoogleService {
   ) {}
 
   googleCheck(req): Observable<any> {
-    // if (!req.user) throw new UnauthorizedException();
+    if (!req.user) throw new UnauthorizedException();
 
-    // const { email } = req.user;
-    // if (!email) throw new ValidationError();
-    const email = 'asdsa';
+    const { email } = req.user;
+    if (!email) throw new ValidationError();
 
     const loginRequestWithOauth = from(
       this.authService.loginWithOauth({ email }),

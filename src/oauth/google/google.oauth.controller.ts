@@ -16,10 +16,10 @@ export class GoogleController {
     return this.googleService.googleCheck(req);
   }
 
-  // //for test
+  //for test
   // @Get('/redirect')
   // @UseGuards(AuthGuard('google'))
   // googleAuthRedirect(@Req() req) {
-  //   return this.googleAuthCheck(req.user);
+  //   return this.googleAuthCheck(req);
   // }
 }
