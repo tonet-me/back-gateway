@@ -43,6 +43,7 @@ export class GoogleService {
           return from(loginRequestWithOauth).pipe(
             map((loginResult) => {
               console.log('logi result', loginResult);
+              console.log(loginResult);
 
               if (!loginResult.success) throw new ForbiddenException();
               return {
