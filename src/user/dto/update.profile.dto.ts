@@ -4,11 +4,13 @@ import {
   IsDefined,
   IsEmail,
   IsEnum,
+  IsNotEmpty,
   IsOptional,
   IsString,
   IsUrl,
-  Matches,
+  MinLength,
 } from 'class-validator';
+import { Match } from 'src/common/decorator/match.decorator';
 export enum UserStatusEnum {
   REGISTERED = 'registered',
   COMPLETED = 'completed',
@@ -65,7 +67,14 @@ export class UserCompleteProfile {
   @IsUrl()
   readonly photo: string;
 
-  @IsEmail()
-  @IsOptional()
-  readonly email: string;
+  @IsNotEmpty()
+  @IsString()
+  @MinLength(8)
+  readonly password: string;
+
+  @IsNotEmpty()
+  @IsString()
+  @Match('password')
+  @MinLength(8)
+  readonly rePassword: string;
 }

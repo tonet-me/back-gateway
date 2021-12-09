@@ -48,8 +48,10 @@ message UserResponse {
 message CompleteProfileRequest{
   string _id = 1;
   string fullName = 2;
-  string photo = 4;
-  string email = 5 ;
+  string photo = 3;
+  string password = 4 ;
+  string rePassword = 5;
+
 }
 
 
