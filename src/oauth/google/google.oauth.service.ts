@@ -33,25 +33,14 @@ export class GoogleService {
       this.authService.loginWithOauth({ email }),
     );
 
-    return from(this.userService.checkProfile({ email })).pipe(
-      mergeMap((checkProfileResult) => {
-        if (checkProfileResult && checkProfileResult.success) {
-          return from(loginRequestWithOauth).pipe(
-            map((loginResult) => {
-              if (!loginResult.success) throw new ForbiddenException();
-              return {
-                checkProfileResult,
-                loginResult,
-              };
-            }),
-          );
-        } else throw new ForbiddenException();
-      }),
-      map(({ checkProfileResult, loginResult }) => {
-        return new Responser(loginResult.success, loginResult.message, {
-          ...loginResult.data,
-          status: checkProfileResult.data.status,
-        });
+    return from(loginRequestWithOauth).pipe(
+      map((loginResult) => {
+        if (!loginResult.success) throw new ForbiddenException();
+        return new Responser(
+          loginResult.success,
+          loginResult.message,
+          loginResult.data,
+        );
       }),
     );
   }

@@ -3,7 +3,6 @@ import { IResponse } from 'src/common/interface/responser.interface';
 import { UserStatusEnum } from '../dto/update.profile.dto';
 
 export interface IUserService {
-  checkProfile(data: Partial<IUser>): Observable<IResponse<IUser>>;
   getProfile(data: Partial<IUser>): Observable<IResponse<IUser>>;
   updateProfile(data: Partial<IUser>): Observable<IResponse<IUser>>;
   completeProfile(data: Partial<IUser>): Observable<IResponse<IUser>>;

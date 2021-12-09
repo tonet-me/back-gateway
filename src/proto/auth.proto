@@ -54,11 +54,13 @@ message GetRefreshTokenRequest {
 message LoginResult {
   string accessToken = 1 ;
   string refreshToken = 2 ;
+  string status = 3 ;
+
   //ERROR
-  int32 errorCode = 3 ;
-  string timestamp = 4 ;
-  string path = 5 ;
-  string message = 6 ;
+  int32 errorCode = 4 ;
+  string timestamp = 5 ;
+  string path = 6 ;
+  string message = 7 ;
 }
 
 message LoginResponse{
