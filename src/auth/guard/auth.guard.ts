@@ -14,7 +14,7 @@ import { IAuthService } from 'src/auth/interface/auth.interface';
 export class AuthGuard implements CanActivate {
   private authService: IAuthService;
 
-  constructor(@Inject('AUTH_OTP_PACKAGE') private client: ClientGrpc) {}
+  constructor(@Inject('AUTH_PACKAGE') private client: ClientGrpc) {}
 
   onModuleInit() {
     this.authService = this.client.getService<IAuthService>('AuthService');

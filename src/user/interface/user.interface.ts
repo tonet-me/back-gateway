@@ -11,7 +11,6 @@ export interface IUserService {
 export interface IUser {
   readonly _id: string;
   readonly fullName: string;
-  readonly mobile: string;
   readonly email: string;
   readonly emailVerify: boolean;
   readonly verified: boolean;

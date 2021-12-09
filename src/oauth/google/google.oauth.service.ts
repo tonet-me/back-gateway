@@ -17,7 +17,7 @@ export class GoogleService {
   private authService: IAuthService;
   constructor(
     @Inject('USER_PACKAGE') private client: ClientGrpc,
-    @Inject('AUTH_OTP_PACKAGE') private authClient: ClientGrpc,
+    @Inject('AUTH_PACKAGE') private authClient: ClientGrpc,
   ) {}
 
   googleCheck(req): Observable<any> {
@@ -25,9 +25,6 @@ export class GoogleService {
 
     const { email } = req.user;
     if (!email) throw new ValidationError();
-    console.log('user is', req.user);
-
-    console.log('email is', email);
 
     const loginRequestWithOauth = from(
       this.authService.loginWithOauth({ email }),

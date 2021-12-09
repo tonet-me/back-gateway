@@ -9,23 +9,15 @@ import { AuthController } from './auth.controller';
   imports: [
     ClientsModule.register([
       {
-        name: 'AUTH_OTP_PACKAGE',
+        name: 'AUTH_PACKAGE',
         transport: Transport.GRPC,
         options: {
-          package: ['user.auth.otp'],
+          package: ['user.auth'],
           protoPath: join(__dirname, '../../proto/auth.proto'),
           url: 'localhost:50051',
         },
       },
     ]),
-    ThrottlerModule.forRootAsync({
-      imports: [ConfigModule],
-      inject: [ConfigService],
-      useFactory: (config: ConfigService) => ({
-        ttl: config.get('THROTTLE_TTL_OTP'),
-        limit: config.get('THROTTLE_LIMIT_OTP'),
-      }),
-    }),
   ],
   controllers: [AuthController],
   exports: [ClientsModule],

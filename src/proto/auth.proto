@@ -1,48 +1,24 @@
 syntax = "proto3";
 
-package  user.auth.otp;
+package  user.auth;
 
 message UserResult {
   string _id = 1;
   string fullName = 2;
   string email = 3;
   bool emailVerify = 4;
-  string mobile = 5;
-  string photo = 6;
-  bool isActive = 7;
-  bool verified = 8;
-  string status = 9;
+  string photo = 5;
+  bool isActive = 6;
+  bool verified = 7;
+  string status = 8;
     //ERROR
-    int32 errorCode = 10 ;
-    string timestamp = 11 ;
-    string path = 12 ;
-    string message = 13 ;
+    int32 errorCode = 9 ;
+    string timestamp = 10 ;
+    string path = 11 ;
+    string message = 12 ;
 }
 message MakeOauthRequest {
   string email = 1;
-}
-
-
-message MakeOtpResponse {
-  bool success = 1;
-  string message = 2;
-  MakeOtpResult data = 3;
-  int32 status = 4;
-  
-}
-
-message MakeOtpResult {
- int32 code = 1;
-   //ERROR
-   int32 errorCode = 2 ;
-   string timestamp = 3 ;
-   string path = 4 ;
-   string message = 5 ;
-}
-
-message LoginOtpRequest {
-  string phoneNumber = 1;
-  int32 code = 2;
 }
 
 message GetRefreshTokenRequest {
@@ -50,12 +26,15 @@ message GetRefreshTokenRequest {
   int32 code = 2;
 }
 
+message ValidateAccessTokenRequest {
+  string accessToken = 1;
+}
+
 
 message LoginResult {
   string accessToken = 1 ;
   string refreshToken = 2 ;
   string status = 3 ;
-
   //ERROR
   int32 errorCode = 4 ;
   string timestamp = 5 ;
@@ -69,6 +48,7 @@ message LoginResponse{
   LoginResult data = 3;
   int32 status = 4;
 }
+
 message ValidateAccessTokenResponse{
   bool success = 1;
   string message = 2;
@@ -79,6 +59,6 @@ message ValidateAccessTokenResponse{
 
 service AuthService {
   rpc LoginWithOauth (MakeOauthRequest) returns (LoginResponse);
-  rpc ValidateAccessToken (LoginResult) returns (ValidateAccessTokenResponse);
+  rpc ValidateAccessToken (ValidateAccessTokenRequest) returns (ValidateAccessTokenResponse);
   rpc GetRefreshToken (GetRefreshTokenRequest) returns (LoginResponse);
 }

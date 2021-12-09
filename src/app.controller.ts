@@ -111,7 +111,4 @@ export class AppController {
       text: 'loaderio-169937cb13dd33e0b33b75df8a4a2bbe',
     });
   }
-  @UseGuards(GoogleOauthGuard)
-  @Get('/oauth')
-  testoauth() {}
 }

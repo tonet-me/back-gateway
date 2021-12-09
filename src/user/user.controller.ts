@@ -13,14 +13,12 @@ import { from, Observable } from 'rxjs';
 import { IReq } from 'src/common/interface/req.interface';
 import { IResponse } from 'src/common/interface/responser.interface';
 import { AuthGuard } from 'src/auth/guard/auth.guard';
-import {
-  UserCompleteProfile,
-  UserStatusEnum,
-  UserUpdateLimitDTO,
-} from './dto/update.profile.dto';
+import { UserStatusEnum, UserUpdateLimitDTO } from './dto/update.profile.dto';
 import { IUser, IUserService } from './interface/user.interface';
 import { UserStatusGuard } from 'src/auth/guard/userStatus.guard';
 import { UserStatus } from 'src/auth/decorator/user.status';
+import { UserCompleteProfileWithEmailDTO } from './dto/complete.profile.email.dto';
+import { UserCompleteProfileWithOauthDTO } from './dto/complete.profile.oauth.dto';
 
 @Controller('user')
 export class UserController {
@@ -32,13 +30,29 @@ export class UserController {
     this.userService = this.client.getService<IUserService>('UserService');
   }
 
-  @Post('/complete')
+  @Post('/complete-oauth')
+  @UseGuards(UserStatusGuard)
+  @UserStatus(UserStatusEnum.REGISTERED)
+  @UseGuards(AuthGuard)
+  completeProfileWithOauth(
+    @Req() req: IReq,
+    @Body() userCompleteProfile: UserCompleteProfileWithOauthDTO,
+  ): Observable<IResponse<IUser>> {
+    return from(
+      this.userService.completeProfile({
+        ...userCompleteProfile,
+        _id: req.user._id,
+      }),
+    );
+  }
+
+  @Post('/complete-email')
   @UseGuards(UserStatusGuard)
   @UserStatus(UserStatusEnum.REGISTERED)
   @UseGuards(AuthGuard)
   completeProfile(
     @Req() req: IReq,
-    @Body() userCompleteProfile: UserCompleteProfile,
+    @Body() userCompleteProfile: UserCompleteProfileWithEmailDTO,
   ): Observable<IResponse<IUser>> {
     return from(
       this.userService.completeProfile({
@@ -49,8 +63,6 @@ export class UserController {
   }
 
   @Get('/profile')
-  // @UseGuards(UserStatusGuard)
-  // @UserStatus(UserStatusEnum.COMPLETED)
   @UseGuards(AuthGuard)
   getProfile(@Req() req: IReq): Observable<IResponse<IUser>> {
     return from(
@@ -75,32 +87,4 @@ export class UserController {
       }),
     );
   }
-
-  // @Get('/:userName')
-  // getUserPublic(
-  //   @Param() { userName }: UserNameDTO,
-  // ): Observable<IResponse<any>> {
-  //   const userresult = from(
-  //     this.userService.getUserPublic({
-  //       userName,
-  //     }),
-  //   );
-  //   const userresult2 = from(
-  //     this.userService.getUserPublic({
-  //       userName,
-  //     }),
-  //   );
-  //   return merge(userresult, userresult2);
-  //   // return forkJoin([
-  //   //   from(
-  //   //     this.userService.getUser({
-  //   //       userName,
-  //   //     }),
-  //   //   ),
-  //   // ]).pipe(
-  //   //   merge((data) => {
-  //   //     return data;
-  //   //   }),
-  //   // );
-  // }
 }

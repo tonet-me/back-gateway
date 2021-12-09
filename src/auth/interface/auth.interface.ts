@@ -2,43 +2,28 @@ import { Observable } from 'rxjs';
 import { IResponse } from 'src/common/interface/responser.interface';
 
 export interface IAuthService {
-  makeOtp(data: IMakeOtpRequest): Observable<IResponse<IMakeOtpResult>>;
   loginWithOauth(
-    data: IOaothGenerateToken,
-  ): Observable<IResponse<ILoginOtpResult>>;
+    data: IOauthGenerateToken,
+  ): Observable<IResponse<ILoginResult>>;
   validateAccessToken(
     data: IValidateAccessTokenRequest,
   ): Observable<IResponse<any>>;
   getRefreshToken(
     data: IGetRefreshTokenRequest,
-  ): Observable<IResponse<ILoginOtpResult>>;
+  ): Observable<IResponse<ILoginResult>>;
 }
 
-/**
- * make otp interface
- */
-export interface IMakeOtpRequest {
-  phoneNumber: string;
-}
-
-export interface IMakeOtpResult {
-  code: number;
-}
-
-/**
- * check verification code
- */
-
-export interface IOaothGenerateToken {
+export interface IOauthGenerateToken {
   email: string;
 }
 export interface IGetRefreshTokenRequest {
   refreshToken: string;
 }
 
-export interface ILoginOtpResult {
+export interface ILoginResult {
   accessToken: string;
   refreshToken: string;
+  status?: string;
 }
 
 export interface IValidateAccessTokenRequest {

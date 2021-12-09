@@ -8,31 +8,27 @@ message User {
   string fullName = 2;
   string email = 3;
   bool emailVerify = 4;
-  string mobile = 5;
-  string photo = 6;
-  bool isActive = 7;
-  bool verified = 8;
-  string status = 9;
+  string photo = 5;
+  bool isActive = 6;
+  bool verified = 7;
+  string status = 8;
     //ERROR
-    int32 errorCode = 10 ;
-    string timestamp = 11 ;
-    string path = 12 ;
-    string message = 13 ;
+    int32 errorCode = 9 ;
+    string timestamp = 10 ;
+    string path = 11 ;
+    string message = 12 ;
 
 }
 
 message UserUpdateLimitRequest {
   string fullName = 1;
-  string email = 2;
-  string photo = 3;
-  string _id = 4;
+  string photo = 2;
+  string _id = 3;
 }
 
 message GetProfileRequest {
   string _id = 4;
 }
-
-
 
 message UserResponse {
   bool success = 1;
@@ -42,21 +38,16 @@ message UserResponse {
   
 }
 
-
-
-
-message CompleteProfileRequest{
+message CompleteProfileWithOauthRequest{
   string _id = 1;
   string fullName = 2;
   string photo = 3;
   string password = 4 ;
-  string rePassword = 5;
-
 }
 
 
 service UserService {
   rpc GetProfile (GetProfileRequest) returns (UserResponse);
   rpc UpdateProfile (UserUpdateLimitRequest) returns (UserResponse);
-  rpc CompleteProfile (CompleteProfileRequest) returns (UserResponse);
+  rpc CompleteProfileWithOauth (CompleteProfileWithOauthRequest) returns (UserResponse);
 }
