@@ -35,16 +35,9 @@ export class GoogleService {
 
     return from(this.userService.checkProfile({ email })).pipe(
       mergeMap((checkProfileResult) => {
-        if (
-          checkProfileResult &&
-          checkProfileResult.success &&
-          checkProfileResult.data._id
-        ) {
+        if (checkProfileResult && checkProfileResult.success) {
           return from(loginRequestWithOauth).pipe(
             map((loginResult) => {
-              console.log('logi result', loginResult);
-              console.log(loginResult);
-
               if (!loginResult.success) throw new ForbiddenException();
               return {
                 checkProfileResult,
