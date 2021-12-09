@@ -18,8 +18,8 @@ message UserResult {
     string path = 12 ;
     string message = 13 ;
 }
-message MakeOtpRequest {
-  string phoneNumber = 1;
+message MakeOauthRequest {
+  string email = 1;
 }
 
 
@@ -51,7 +51,7 @@ message GetRefreshTokenRequest {
 }
 
 
-message LoginOtpResult {
+message LoginResult {
   string accessToken = 1 ;
   string refreshToken = 2 ;
   //ERROR
@@ -61,10 +61,10 @@ message LoginOtpResult {
   string message = 6 ;
 }
 
-message LoginOtpResponse{
+message LoginResponse{
   bool success = 1;
   string message = 2;
-  LoginOtpResult data = 3;
+  LoginResult data = 3;
   int32 status = 4;
 }
 message ValidateAccessTokenResponse{
@@ -76,8 +76,7 @@ message ValidateAccessTokenResponse{
 }
 
 service AuthService {
-  rpc LoginWithOauth (MakeOtpRequest) returns (MakeOtpResponse);
-  rpc LoginOtp (LoginOtpRequest) returns (LoginOtpResponse);
-  rpc ValidateAccessToken (LoginOtpResult) returns (ValidateAccessTokenResponse);
-  rpc GetRefreshToken (GetRefreshTokenRequest) returns (LoginOtpResponse);
+  rpc LoginWithOauth (MakeOauthRequest) returns (LoginResponse);
+  rpc ValidateAccessToken (LoginResult) returns (ValidateAccessTokenResponse);
+  rpc GetRefreshToken (GetRefreshTokenRequest) returns (LoginResponse);
 }

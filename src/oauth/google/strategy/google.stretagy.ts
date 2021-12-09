@@ -26,7 +26,6 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
       _accessToken,
       _refreshToken,
       provider: 'google',
-
       providerId: id,
       fullName: `${displayName} `,
       email: emails[0].value,

@@ -15,11 +15,4 @@ export class GoogleController {
   googleAuthCheck(@Req() req) {
     return this.googleService.googleCheck(req);
   }
-
-  //for test
-  // @Get('/redirect')
-  // @UseGuards(AuthGuard('google'))
-  // googleAuthRedirect(@Req() req) {
-  //   return this.googleAuthCheck(req);
-  // }
 }

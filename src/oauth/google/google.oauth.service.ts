@@ -25,6 +25,9 @@ export class GoogleService {
 
     const { email } = req.user;
     if (!email) throw new ValidationError();
+    console.log('user is', req.user);
+
+    console.log('email is', email);
 
     const loginRequestWithOauth = from(
       this.authService.loginWithOauth({ email }),
