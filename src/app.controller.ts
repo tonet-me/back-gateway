@@ -5,6 +5,7 @@ import {
   Inject,
   NotFoundException,
   Param,
+  UseGuards,
 } from '@nestjs/common';
 import { ClientGrpc } from '@nestjs/microservices';
 import { from, map, mergeMap, Observable } from 'rxjs';
@@ -14,6 +15,7 @@ import { ICard, ICardService } from './card/interface/card.interface';
 import { IResponse } from './common/interface/responser.interface';
 import { Responser } from './common/utils/responser';
 import { getUserAgent } from './common/utils/user.agent.parser.utils';
+import { GoogleOauthGuard } from './oauth/google/gaurd/google.oauth.guard';
 import { IViewCardService } from './view-card/interface/view-card.interface';
 @Controller()
 export class AppController {
@@ -103,43 +105,13 @@ export class AppController {
     );
   }
 
-  // @Get('un/:userName')
-  // getUserPublic(
-  //   @Param() { userName }: UserNameDTO,
-  // ): Observable<IResponse<any>> {
-  //   const userReq = from(
-  //     this.userService.getUserPublic({
-  //       userName,
-  //     }),
-  //   );
-  //   return userReq.pipe(
-  //     mergeMap((userResult) => {
-  //       if (userResult.success == false)
-  //         throw new NotFoundException('username not found');
-  //       return this.socialService
-  //         .getSocialPublic({ userId: userResult.data._id })
-  //         .pipe(
-  //           map((socialsResult) => {
-  //             return {
-  //               userResult: userResult.data,
-  //               socialsResult: socialsResult,
-  //             };
-  //           }),
-  //         );
-  //     }),
-  //     map(({ userResult, socialsResult }) => {
-  //       return new Responser<any>(true, '', {
-  //         userResult,
-  //         socialsResult: socialsResult.data || [],
-  //       });
-  //     }),
-  //   );
-  // }
-
   @Get('/loaderio-169937cb13dd33e0b33b75df8a4a2bbe.txt')
   test() {
     return new Responser(true, 'loaderio', {
       text: 'loaderio-169937cb13dd33e0b33b75df8a4a2bbe',
     });
   }
+  @UseGuards(GoogleOauthGuard)
+  @Get('/oauth')
+  testoauth() {}
 }

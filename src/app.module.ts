@@ -8,6 +8,7 @@ import { CardModule } from './card/card.module';
 import { AppController } from './app.controller';
 import { StateModule } from './state/state.module';
 import { ViewCardModule } from './view-card/view-card.module';
+import { OAuthModule } from './oauth/oauth.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { ViewCardModule } from './view-card/view-card.module';
     CardModule,
     StateModule,
     ViewCardModule,
+    OAuthModule,
   ],
   controllers: [AppController],
 })

@@ -33,7 +33,22 @@ message GetProfileRequest {
 }
 
 
+message GetCheckProfileRequest {
+  string _id = 1;
+  string email = 2;
+}
+
+
 message UserResponse {
+  bool success = 1;
+  string message = 2;
+  User data = 3;
+  int32 status = 4;
+  
+}
+
+
+message CheckProfileResponse {
   bool success = 1;
   string message = 2;
   User data = 3;
@@ -50,6 +65,7 @@ message CompleteProfileRequest{
 
 
 service UserService {
+  rpc CheckProfile (GetCheckProfileRequest) returns (CheckProfileResponse);
   rpc GetProfile (GetProfileRequest) returns (UserResponse);
   rpc UpdateProfile (UserUpdateLimitRequest) returns (UserResponse);
   rpc CompleteProfile (CompleteProfileRequest) returns (UserResponse);

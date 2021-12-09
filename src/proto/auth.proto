@@ -76,7 +76,7 @@ message ValidateAccessTokenResponse{
 }
 
 service AuthService {
-  rpc MakeOtp (MakeOtpRequest) returns (MakeOtpResponse);
+  rpc LoginWithOauth (MakeOtpRequest) returns (MakeOtpResponse);
   rpc LoginOtp (LoginOtpRequest) returns (LoginOtpResponse);
   rpc ValidateAccessToken (LoginOtpResult) returns (ValidateAccessTokenResponse);
   rpc GetRefreshToken (GetRefreshTokenRequest) returns (LoginOtpResponse);
