@@ -32,7 +32,7 @@ export class GoogleService {
 
     return from(loginRequestWithOauth).pipe(
       map((loginResult) => {
-        if (!loginResult.success) throw new ForbiddenException();
+        if (!loginResult.success) return loginResult;
         return new Responser(
           loginResult.success,
           loginResult.message,
