@@ -12,12 +12,13 @@ message User {
   bool isActive = 6;
   bool verified = 7;
   string status = 8;
+  bool oauthRegistered = 9;
+  string oauthProvider = 10;
     //ERROR
-    int32 errorCode = 9 ;
-    string timestamp = 10 ;
-    string path = 11 ;
-    string message = 12 ;
-
+    int32 errorCode = 11 ;
+    string timestamp = 12 ;
+    string path = 13 ;
+    string message = 14 ;
 }
 
 message UserUpdateLimitRequest {

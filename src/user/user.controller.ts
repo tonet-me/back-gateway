@@ -19,7 +19,7 @@ import { UserStatusGuard } from 'src/auth/guard/userStatus.guard';
 import { UserStatus } from 'src/auth/decorator/user.status';
 import { UserCompleteProfileWithEmailDTO } from './dto/complete.profile.email.dto';
 import { UserCompleteProfileWithOauthDTO } from './dto/complete.profile.oauth.dto';
-
+import { IsOauthRegisteredGuard } from 'src/auth/guard/check.oauth.registered.guard';
 @Controller('user')
 export class UserController {
   private userService: IUserService;
@@ -31,6 +31,7 @@ export class UserController {
   }
 
   @Post('/complete-oauth')
+  @UseGuards(IsOauthRegisteredGuard)
   @UseGuards(UserStatusGuard)
   @UserStatus(UserStatusEnum.REGISTERED)
   @UseGuards(AuthGuard)
@@ -39,7 +40,7 @@ export class UserController {
     @Body() userCompleteProfile: UserCompleteProfileWithOauthDTO,
   ): Observable<IResponse<IUser>> {
     return from(
-      this.userService.completeProfile({
+      this.userService.completeProfileWithOauth({
         ...userCompleteProfile,
         _id: req.user._id,
       }),
@@ -55,7 +56,7 @@ export class UserController {
     @Body() userCompleteProfile: UserCompleteProfileWithEmailDTO,
   ): Observable<IResponse<IUser>> {
     return from(
-      this.userService.completeProfile({
+      this.userService.completeProfileWithOauth({
         ...userCompleteProfile,
         _id: req.user._id,
       }),

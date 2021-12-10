@@ -15,6 +15,7 @@ export interface IAuthService {
 
 export interface IOauthGenerateToken {
   email: string;
+  oauthProvider: string;
 }
 export interface IGetRefreshTokenRequest {
   refreshToken: string;

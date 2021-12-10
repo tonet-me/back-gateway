@@ -5,7 +5,7 @@ import { UserStatusEnum } from '../dto/update.profile.dto';
 export interface IUserService {
   getProfile(data: Partial<IUser>): Observable<IResponse<IUser>>;
   updateProfile(data: Partial<IUser>): Observable<IResponse<IUser>>;
-  completeProfile(data: Partial<IUser>): Observable<IResponse<IUser>>;
+  completeProfileWithOauth(data: Partial<IUser>): Observable<IResponse<IUser>>;
 }
 
 export interface IUser {
@@ -17,4 +17,5 @@ export interface IUser {
   readonly photo: string;
   readonly isActive: boolean;
   readonly status: UserStatusEnum;
+  readonly oauthRegistered: boolean;
 }
