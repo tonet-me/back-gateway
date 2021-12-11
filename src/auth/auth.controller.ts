@@ -2,8 +2,15 @@ import { Body, Controller, Inject, Post } from '@nestjs/common';
 import { ClientGrpc } from '@nestjs/microservices';
 import { from, Observable } from 'rxjs';
 import { IResponse } from 'src/common/interface/responser.interface';
+import { CheckEmailBeforRegister } from './dto/check.register.mail.dto';
 import { GetRefreshTokenDTO } from './dto/get-refresh-token.dto';
-import { IAuthService, ILoginResult } from './interface/auth.interface';
+import { LoginWithEmailDTO } from './dto/login.email.dto';
+import { RegisterWithEmailDTO } from './dto/register.email.dto';
+import {
+  IAuthService,
+  ICheckEmailBeforRegisterResponse,
+  ILoginResult,
+} from './interface/auth.interface';
 
 @Controller('auth')
 export class AuthController {
@@ -19,6 +26,27 @@ export class AuthController {
         refreshToken: getRefreshToken.refreshToken,
       }),
     );
+  }
+
+  @Post('/email/check-register')
+  checkEmailBeforRegister(
+    @Body() checkEmail: CheckEmailBeforRegister,
+  ): Observable<IResponse<ICheckEmailBeforRegisterResponse>> {
+    return from(this.authService.checkEmailBeforRegister(checkEmail));
+  }
+
+  @Post('/email/register')
+  registerWithEmail(
+    @Body() registerWithEmail: RegisterWithEmailDTO,
+  ): Observable<IResponse<ILoginResult>> {
+    return from(this.authService.registerWithEmail(registerWithEmail));
+  }
+
+  @Post('/email/login')
+  loginWithEmail(
+    @Body() loginWithEmail: LoginWithEmailDTO,
+  ): Observable<IResponse<ILoginResult>> {
+    return from(this.authService.loginWithEmail(loginWithEmail));
   }
 
   onModuleInit() {

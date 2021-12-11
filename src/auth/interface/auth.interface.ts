@@ -11,6 +11,17 @@ export interface IAuthService {
   getRefreshToken(
     data: IGetRefreshTokenRequest,
   ): Observable<IResponse<ILoginResult>>;
+  checkEmailBeforRegister(
+    data: ICheckEmailBeforRegisterRequest,
+  ): Observable<IResponse<ICheckEmailBeforRegisterResponse>>;
+
+  registerWithEmail(
+    data: IRegisterWithEmailRequest,
+  ): Observable<IResponse<ILoginResult>>;
+
+  loginWithEmail(
+    data: ILoginWithEmailRequest,
+  ): Observable<IResponse<ILoginResult>>;
 }
 
 export interface IOauthGenerateToken {
@@ -29,4 +40,24 @@ export interface ILoginResult {
 
 export interface IValidateAccessTokenRequest {
   accessToken: string;
+}
+
+export interface ICheckEmailBeforRegisterRequest {
+  email: string;
+}
+
+export interface ICheckEmailBeforRegisterResponse {
+  email: string;
+  registered: boolean;
+}
+
+export interface IRegisterWithEmailRequest {
+  email: string;
+  password: string;
+  code: number;
+}
+
+export interface ILoginWithEmailRequest {
+  email: string;
+  password: string;
 }

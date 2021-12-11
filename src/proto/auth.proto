@@ -59,8 +59,33 @@ message ValidateAccessTokenResponse{
 
 }
 
+message CheckEmailBeforRegisterRequest{
+  string email = 1;
+}
+message CheckEmailBeforRegisterResponse{
+  string email = 1;
+  bool registered = 2;
+
+}
+
+message RegisterWithEmailRequest{
+  string email = 1;
+  string password = 2;
+  int32 code = 3;
+}
+
+message ILoginWithEmailRequest{
+  string email = 1;
+  string password = 2;
+}
+
 service AuthService {
   rpc LoginWithOauth (MakeOauthRequest) returns (LoginResponse);
   rpc ValidateAccessToken (ValidateAccessTokenRequest) returns (ValidateAccessTokenResponse);
   rpc GetRefreshToken (GetRefreshTokenRequest) returns (LoginResponse);
+  rpc checkEmailBeforRegister (CheckEmailBeforRegisterRequest) returns (CheckEmailBeforRegisterResponse);
+  rpc registerWithEmail (RegisterWithEmailRequest) returns (LoginResponse);
+  rpc loginWithEmail (ILoginWithEmailRequest) returns (LoginResponse);
+
+
 }
