@@ -8,6 +8,15 @@ export interface IUserService {
   changePassword(data: Partial<IUser>): Observable<IResponse<IUser>>;
   completeProfileWithOauth(data: Partial<IUser>): Observable<IResponse<IUser>>;
   completeProfileWithEmail(data: Partial<IUser>): Observable<IResponse<IUser>>;
+  requestCodeForForgetPassword(
+    data: Partial<IUser>,
+  ): Observable<IResponse<IRequestCodeForForgetPassword>>;
+  deleteProfilePhoto(data: Partial<IUser>): Observable<IResponse<IUser>>;
+}
+
+export interface IRequestCodeForForgetPassword {
+  email: string;
+  canUse: boolean;
 }
 
 export interface IUser {

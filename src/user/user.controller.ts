@@ -15,13 +15,18 @@ import { IReq } from 'src/common/interface/req.interface';
 import { IResponse } from 'src/common/interface/responser.interface';
 import { AuthGuard } from 'src/auth/guard/auth.guard';
 import { UserStatusEnum, UserUpdateLimitDTO } from './dto/update.profile.dto';
-import { IUser, IUserService } from './interface/user.interface';
+import {
+  IRequestCodeForForgetPassword,
+  IUser,
+  IUserService,
+} from './interface/user.interface';
 import { UserStatusGuard } from 'src/auth/guard/userStatus.guard';
 import { UserStatus } from 'src/auth/decorator/user.status';
 import { UserCompleteProfileWithEmailDTO } from './dto/complete.profile.email.dto';
 import { UserCompleteProfileWithOauthDTO } from './dto/complete.profile.oauth.dto';
 import { IsOauthRegisteredGuard } from 'src/auth/guard/check.oauth.registered.guard';
 import { ChangePasswordDTO } from './dto/change.password.dto';
+import { ForgetPasswordRequestCodeDTO } from './dto/forget.password.request.code.sto';
 @Controller('user')
 export class UserController {
   private userService: IUserService;
@@ -107,13 +112,24 @@ export class UserController {
     );
   }
 
+  @Post('/forget-password/request-code')
+  requestCodeForForgetPassword(
+    @Req() req: IReq,
+    @Body() { email }: ForgetPasswordRequestCodeDTO,
+  ): Observable<IResponse<IRequestCodeForForgetPassword>> {
+    return from(
+      this.userService.requestCodeForForgetPassword({
+        email,
+      }),
+    );
+  }
+
   @Delete('/profile/photo')
   @UseGuards(AuthGuard)
   deleteProfilePhoto(@Req() req: IReq): Observable<IResponse<IUser>> {
     return from(
-      this.userService.updateProfile({
+      this.userService.deleteProfilePhoto({
         _id: req.user._id,
-        photo: '',
       }),
     );
   }
