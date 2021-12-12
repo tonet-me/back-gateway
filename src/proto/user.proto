@@ -27,6 +27,13 @@ message UserUpdateLimitRequest {
   string _id = 3;
 }
 
+
+message ChangePasswordRequest {
+  string oldPassword = 1;
+  string newPassword = 2;
+  string _id = 3;
+}
+
 message GetProfileRequest {
   string _id = 4;
 }
@@ -56,6 +63,7 @@ message CompleteProfileWithEmailRequest{
 service UserService {
   rpc GetProfile (GetProfileRequest) returns (UserResponse);
   rpc UpdateProfile (UserUpdateLimitRequest) returns (UserResponse);
+  rpc ChangePassword (ChangePasswordRequest) returns (UserResponse);
   rpc CompleteProfileWithOauth (CompleteProfileWithOauthRequest) returns (UserResponse);
   rpc CompleteProfileWithEmail (CompleteProfileWithEmailRequest) returns (UserResponse);
 }

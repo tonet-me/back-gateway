@@ -5,6 +5,7 @@ import { UserStatusEnum } from '../dto/update.profile.dto';
 export interface IUserService {
   getProfile(data: Partial<IUser>): Observable<IResponse<IUser>>;
   updateProfile(data: Partial<IUser>): Observable<IResponse<IUser>>;
+  changePassword(data: Partial<IUser>): Observable<IResponse<IUser>>;
   completeProfileWithOauth(data: Partial<IUser>): Observable<IResponse<IUser>>;
   completeProfileWithEmail(data: Partial<IUser>): Observable<IResponse<IUser>>;
 }

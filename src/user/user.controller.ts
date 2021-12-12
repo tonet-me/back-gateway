@@ -21,6 +21,7 @@ import { UserStatus } from 'src/auth/decorator/user.status';
 import { UserCompleteProfileWithEmailDTO } from './dto/complete.profile.email.dto';
 import { UserCompleteProfileWithOauthDTO } from './dto/complete.profile.oauth.dto';
 import { IsOauthRegisteredGuard } from 'src/auth/guard/check.oauth.registered.guard';
+import { ChangePasswordDTO } from './dto/change.password.dto';
 @Controller('user')
 export class UserController {
   private userService: IUserService;
@@ -85,6 +86,22 @@ export class UserController {
     return from(
       this.userService.updateProfile({
         ...updateProfileBody,
+        _id: req.user._id,
+      }),
+    );
+  }
+
+  @Put('/change-password')
+  @UseGuards(UserStatusGuard)
+  @UserStatus(UserStatusEnum.COMPLETED)
+  @UseGuards(AuthGuard)
+  changePassword(
+    @Req() req: IReq,
+    @Body() changePassword: ChangePasswordDTO,
+  ): Observable<IResponse<IUser>> {
+    return from(
+      this.userService.changePassword({
+        ...changePassword,
         _id: req.user._id,
       }),
     );
