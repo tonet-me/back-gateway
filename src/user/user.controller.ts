@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Inject,
   Post,
@@ -85,6 +86,17 @@ export class UserController {
       this.userService.updateProfile({
         ...updateProfileBody,
         _id: req.user._id,
+      }),
+    );
+  }
+
+  @Delete('/profile/photo')
+  @UseGuards(AuthGuard)
+  deleteProfilePhoto(@Req() req: IReq): Observable<IResponse<IUser>> {
+    return from(
+      this.userService.updateProfile({
+        _id: req.user._id,
+        photo: '',
       }),
     );
   }
