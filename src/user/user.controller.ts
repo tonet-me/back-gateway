@@ -27,6 +27,7 @@ import { UserCompleteProfileWithOauthDTO } from './dto/complete.profile.oauth.dt
 import { IsOauthRegisteredGuard } from 'src/auth/guard/check.oauth.registered.guard';
 import { ChangePasswordDTO } from './dto/change.password.dto';
 import { ForgetPasswordRequestCodeDTO } from './dto/forget.password.request.code.sto';
+import { ForgetPasswordConformDTO } from './dto/forget.password.dto';
 @Controller('user')
 export class UserController {
   private userService: IUserService;
@@ -122,6 +123,14 @@ export class UserController {
         email,
       }),
     );
+  }
+
+  @Post('/forget-password/conform')
+  conformForgetPassword(
+    @Req() req: IReq,
+    @Body() forgetPasswordConform: ForgetPasswordConformDTO,
+  ): Observable<IResponse<Pick<IUser, 'email'>>> {
+    return from(this.userService.forgetPasswordConform(forgetPasswordConform));
   }
 
   @Delete('/profile/photo')

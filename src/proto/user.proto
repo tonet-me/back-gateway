@@ -63,9 +63,22 @@ message RequestCodeForForgetPasswordRequest{
   string email = 1;
 }
 
+
+
 message RequestCodeForForgetPasswordResponse{
   string email = 1;
   bool canUse = 2;
+}
+
+
+message ForgetPasswordConformRequest{
+  string email = 1;
+  string password = 2;
+  int32 code = 3;
+}
+
+message ForgetPasswordConformResponse{
+  string email = 1;
 }
 
 
@@ -78,5 +91,6 @@ service UserService {
   rpc CompleteProfileWithEmail (CompleteProfileWithEmailRequest) returns (UserResponse);
   rpc RequestCodeForForgetPassword (RequestCodeForForgetPasswordRequest) returns (UserResponse);
   rpc DeleteProfilePhoto (GetProfileRequest) returns (UserResponse);
+  rpc ForgetPasswordConform (ForgetPasswordConformRequest) returns (ForgetPasswordConformResponse);
 
 }

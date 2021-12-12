@@ -13,7 +13,7 @@ import {
 } from '@nestjs/common';
 import { AddCardDto } from './dto/add.card.dto';
 import { UpdateCardDto } from './dto/update.card.dto';
-import { CardAvalable, ICard, ICardService } from './interface/card.interface';
+import { CardAvailable, ICard, ICardService } from './interface/card.interface';
 import { ClientGrpc } from '@nestjs/microservices';
 import { AuthGuard } from 'src/auth/guard/auth.guard';
 import { IReq } from 'src/common/interface/req.interface';
@@ -141,7 +141,7 @@ export class CardController {
   @Get('/check-cardname')
   checkCardnameAvailable({
     userName,
-  }: Pick<AddCardDto, 'userName'>): Observable<IResponse<CardAvalable>> {
+  }: Pick<AddCardDto, 'userName'>): Observable<IResponse<CardAvailable>> {
     return from(
       this.cardService.checkCardnameAvailable({
         userName,

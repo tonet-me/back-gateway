@@ -12,11 +12,20 @@ export interface IUserService {
     data: Partial<IUser>,
   ): Observable<IResponse<IRequestCodeForForgetPassword>>;
   deleteProfilePhoto(data: Partial<IUser>): Observable<IResponse<IUser>>;
+  forgetPasswordConform(
+    data: IForgetPasswordConform,
+  ): Observable<IResponse<IUser>>;
 }
 
 export interface IRequestCodeForForgetPassword {
   email: string;
   canUse: boolean;
+}
+
+export interface IForgetPasswordConform {
+  email: string;
+  password: string;
+  code: number;
 }
 
 export interface IUser {

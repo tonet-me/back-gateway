@@ -16,11 +16,11 @@ export interface ICardService {
   deleteOwnCard(data: Partial<ICard>): Observable<IResponse<ICard>>;
   checkCardnameAvailable(
     data: Partial<ICard>,
-  ): Observable<IResponse<CardAvalable>>;
+  ): Observable<IResponse<CardAvailable>>;
   deleteCardPhoto(data: Partial<ICard>): Observable<IResponse<ICard>>;
 }
 
-export interface CardAvalable {
+export interface CardAvailable {
   readonly cardAvailable: boolean;
 }
 

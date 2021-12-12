@@ -5,7 +5,6 @@ import {
   Inject,
   NotFoundException,
   Param,
-  UseGuards,
 } from '@nestjs/common';
 import { ClientGrpc } from '@nestjs/microservices';
 import { from, map, mergeMap, Observable } from 'rxjs';
@@ -15,7 +14,6 @@ import { ICard, ICardService } from './card/interface/card.interface';
 import { IResponse } from './common/interface/responser.interface';
 import { Responser } from './common/utils/responser';
 import { getUserAgent } from './common/utils/user.agent.parser.utils';
-import { GoogleOauthGuard } from './oauth/google/gaurd/google.oauth.guard';
 import { IViewCardService } from './view-card/interface/view-card.interface';
 @Controller()
 export class AppController {
