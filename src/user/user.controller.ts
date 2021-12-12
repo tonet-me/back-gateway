@@ -51,12 +51,12 @@ export class UserController {
   @UseGuards(UserStatusGuard)
   @UserStatus(UserStatusEnum.REGISTERED)
   @UseGuards(AuthGuard)
-  completeProfile(
+  completeProfileWithEmail(
     @Req() req: IReq,
     @Body() userCompleteProfile: UserCompleteProfileWithEmailDTO,
   ): Observable<IResponse<IUser>> {
     return from(
-      this.userService.completeProfileWithOauth({
+      this.userService.completeProfileWithEmail({
         ...userCompleteProfile,
         _id: req.user._id,
       }),

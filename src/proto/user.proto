@@ -46,9 +46,16 @@ message CompleteProfileWithOauthRequest{
   string password = 4 ;
 }
 
+message CompleteProfileWithEmailRequest{
+  string _id = 1;
+  string fullName = 2;
+  string photo = 3;
+}
+
 
 service UserService {
   rpc GetProfile (GetProfileRequest) returns (UserResponse);
   rpc UpdateProfile (UserUpdateLimitRequest) returns (UserResponse);
   rpc CompleteProfileWithOauth (CompleteProfileWithOauthRequest) returns (UserResponse);
+  rpc CompleteProfileWithEmail (CompleteProfileWithEmailRequest) returns (UserResponse);
 }

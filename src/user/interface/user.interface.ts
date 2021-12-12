@@ -6,6 +6,7 @@ export interface IUserService {
   getProfile(data: Partial<IUser>): Observable<IResponse<IUser>>;
   updateProfile(data: Partial<IUser>): Observable<IResponse<IUser>>;
   completeProfileWithOauth(data: Partial<IUser>): Observable<IResponse<IUser>>;
+  completeProfileWithEmail(data: Partial<IUser>): Observable<IResponse<IUser>>;
 }
 
 export interface IUser {
