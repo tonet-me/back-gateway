@@ -152,8 +152,6 @@ message GetCardsRequest {
   CardFilters filters =3;
 }
 
-
-
 message CardResponse {
   bool success = 1;
   string message = 2;
@@ -179,7 +177,6 @@ message CardsResponse {
   string message = 2;
   CardPaginate data = 3;
   int32 status = 4;
-
 }
 
 service CardService {

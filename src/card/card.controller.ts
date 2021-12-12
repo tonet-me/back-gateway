@@ -121,4 +121,21 @@ export class CardController {
       }),
     );
   }
+
+  @Delete('/:catdId/photo')
+  @UseGuards(UserStatusGuard)
+  @UserStatus(UserStatusEnum.COMPLETED)
+  @UseGuards(AuthGuard)
+  deleteCardPhoto(
+    @Req() req: IReq,
+    { cardId }: CardIdDTO,
+  ): Observable<IResponse<ICard>> {
+    return from(
+      this.cardService.updateCard({
+        photo: '',
+        _id: cardId,
+        userId: req.user._id,
+      }),
+    );
+  }
 }
