@@ -179,9 +179,17 @@ message CardsResponse {
   int32 status = 4;
 }
 
-message CheckCardnameAvailableResponse{
+message CheckCardnameAvailableResult{
   bool cardAvailable = 1;
+} 
+
+message CheckCardnameAvailableResponse{
+  bool success = 1;
+  string message = 2;
+  CheckCardnameAvailableResult data = 3;
+  int32 status = 4;
 }
+
 service CardService {
   rpc AddCard (AddCardRequest) returns (CardResponse);
   rpc UpdateCard (UpdateCardRequest) returns (CardResponse);

@@ -78,8 +78,16 @@ message ForgetPasswordConformRequest{
 }
 
 message ForgetPasswordConformResponse{
+  bool success = 1;
+  string message = 2;
+  ForgetPasswordConformResult data = 3;
+  int32 status = 4;
+}
+
+message ForgetPasswordConformResult{
   string email = 1;
 }
+
 
 
 
