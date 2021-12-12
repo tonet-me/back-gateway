@@ -179,6 +179,9 @@ message CardsResponse {
   int32 status = 4;
 }
 
+message CheckCardnameAvailableResponse{
+  bool cardAvailable = 1;
+}
 service CardService {
   rpc AddCard (AddCardRequest) returns (CardResponse);
   rpc UpdateCard (UpdateCardRequest) returns (CardResponse);
@@ -187,4 +190,6 @@ service CardService {
   rpc GetPublicCardByUsername (GetPublicCardByUsername) returns (CardResponse);
   rpc GetPublicCardByQrcode (GetPublicCardByQrcode) returns (CardResponse);
   rpc DeleteOwnCard (GetOwnCard) returns (CardResponse);
+  rpc CheckCardnameAvailable (GetPublicCardByUsername) returns (CheckCardnameAvailableResponse);
+
 }

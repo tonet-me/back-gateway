@@ -14,6 +14,13 @@ export interface ICardService {
   getPublicCardByUsername(data: Partial<ICard>): Observable<IResponse<ICard>>;
   getPublicCardByQrcode(data: Pick<ICard, '_id'>): Observable<IResponse<ICard>>;
   deleteOwnCard(data: Partial<ICard>): Observable<IResponse<ICard>>;
+  checkCardnameAvailable(
+    data: Partial<ICard>,
+  ): Observable<IResponse<CardAvalable>>;
+}
+
+export interface CardAvalable {
+  readonly cardAvailable: boolean;
 }
 
 interface Phone {
