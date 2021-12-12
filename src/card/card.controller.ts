@@ -128,7 +128,7 @@ export class CardController {
   @UseGuards(AuthGuard)
   deleteCardPhoto(
     @Req() req: IReq,
-    { cardId }: CardIdDTO,
+    @Param() { cardId }: CardIdDTO,
   ): Observable<IResponse<ICard>> {
     return from(
       this.cardService.deleteCardPhoto({
@@ -138,10 +138,10 @@ export class CardController {
     );
   }
 
-  @Get('/check-cardname')
-  checkCardnameAvailable({
-    userName,
-  }: Pick<AddCardDto, 'userName'>): Observable<IResponse<CardAvailable>> {
+  @Get('/check-cardname/:userName')
+  checkCardnameAvailable(
+    @Param() { userName }: Pick<AddCardDto, 'userName'>,
+  ): Observable<IResponse<CardAvailable>> {
     return from(
       this.cardService.checkCardnameAvailable({
         userName,
