@@ -191,5 +191,5 @@ service CardService {
   rpc GetPublicCardByQrcode (GetPublicCardByQrcode) returns (CardResponse);
   rpc DeleteOwnCard (GetOwnCard) returns (CardResponse);
   rpc CheckCardnameAvailable (GetPublicCardByUsername) returns (CheckCardnameAvailableResponse);
-
+  rpc DeleteCardPhoto (GetOwnCard) returns (CardResponse);
 }

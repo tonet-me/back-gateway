@@ -17,6 +17,7 @@ export interface ICardService {
   checkCardnameAvailable(
     data: Partial<ICard>,
   ): Observable<IResponse<CardAvalable>>;
+  deleteCardPhoto(data: Partial<ICard>): Observable<IResponse<ICard>>;
 }
 
 export interface CardAvalable {

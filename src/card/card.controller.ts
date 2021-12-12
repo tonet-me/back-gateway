@@ -122,7 +122,7 @@ export class CardController {
     );
   }
 
-  @Delete('/:catdId/photo')
+  @Delete('/:cardId/photo')
   @UseGuards(UserStatusGuard)
   @UserStatus(UserStatusEnum.COMPLETED)
   @UseGuards(AuthGuard)
@@ -131,8 +131,7 @@ export class CardController {
     { cardId }: CardIdDTO,
   ): Observable<IResponse<ICard>> {
     return from(
-      this.cardService.updateCard({
-        photo: '',
+      this.cardService.deleteCardPhoto({
         _id: cardId,
         userId: req.user._id,
       }),
