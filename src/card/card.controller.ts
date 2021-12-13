@@ -25,6 +25,7 @@ import { UserStatusEnum } from 'src/user/dto/update.profile.dto';
 import { UserStatusGuard } from 'src/auth/guard/userStatus.guard';
 import { QueryResolver } from 'src/common/utils/query.resolver';
 import { CardQueryResolversDTO } from './dto/card.pagination.dto';
+import { CardNameDTO } from './dto/cardName.dto';
 
 @Controller('card')
 export class CardController {
@@ -140,7 +141,7 @@ export class CardController {
 
   @Get('/check-cardname/:userName')
   checkCardnameAvailable(
-    @Param() { userName }: Pick<AddCardDto, 'userName'>,
+    @Param() { userName }: CardNameDTO,
   ): Observable<IResponse<CardAvailable>> {
     return from(
       this.cardService.checkCardnameAvailable({

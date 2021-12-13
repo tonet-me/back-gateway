@@ -69,6 +69,13 @@ message CheckEmailBeforRegisterRequest{
 message CheckEmailBeforRegisterResult{
   string email = 1;
   bool registered = 2;
+   //ERROR
+   int32 errorCode = 3 ;
+   string timestamp = 4 ;
+   string path = 5 ;
+   string message = 6 ;
+
+
 
 }
 message CheckEmailBeforRegisterResponse{
