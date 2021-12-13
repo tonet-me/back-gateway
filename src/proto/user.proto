@@ -86,6 +86,10 @@ message ForgetPasswordConformResponse{
 
 message ForgetPasswordConformResult{
   string email = 1;
+  int32 errorCode = 2 ;
+  string timestamp = 3 ;
+  string path = 4 ;
+  string message = 5 ;
 }
 
 

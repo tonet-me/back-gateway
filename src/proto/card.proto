@@ -181,6 +181,11 @@ message CardsResponse {
 
 message CheckCardnameAvailableResult{
   bool cardAvailable = 1;
+  int32 errorCode = 2 ;
+  string timestamp = 3 ;
+  string path = 4 ;
+  string message = 5 ;
+  
 } 
 
 message CheckCardnameAvailableResponse{

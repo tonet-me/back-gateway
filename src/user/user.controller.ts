@@ -115,7 +115,6 @@ export class UserController {
 
   @Post('/forget-password/request-code')
   requestCodeForForgetPassword(
-    @Req() req: IReq,
     @Body() { email }: ForgetPasswordRequestCodeDTO,
   ): Observable<IResponse<IRequestCodeForForgetPassword>> {
     return from(
@@ -127,7 +126,6 @@ export class UserController {
 
   @Post('/forget-password/conform')
   conformForgetPassword(
-    @Req() req: IReq,
     @Body() forgetPasswordConform: ForgetPasswordConformDTO,
   ): Observable<IResponse<Pick<IUser, 'email'>>> {
     return from(this.userService.forgetPasswordConform(forgetPasswordConform));
